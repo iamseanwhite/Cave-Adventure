@@ -22,7 +22,7 @@ public class CameraMovement : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update ()
+	void LateUpdate ()
     {
 
         //if (Character.transform.position == characterTransformOld.position && Character.transform != characterTransformOld) { 
