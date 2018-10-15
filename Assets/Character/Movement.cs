@@ -34,7 +34,7 @@ public class Movement : MonoBehaviour
         animator.SetFloat("Turn", x, 1f, Time.deltaTime * 5f);
 
 
-
+        if (z != 0)
         transform.Translate(x *.03f, 0, z * .07f);
     }
 }
