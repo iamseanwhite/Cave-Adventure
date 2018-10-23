@@ -22,11 +22,11 @@ public class CameraMovement : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void LateUpdate ()
+	void LateUpdate()
     {
 
         //if (Character.transform.position == characterTransformOld.position && Character.transform != characterTransformOld) { 
-            this.transform.LookAt(Character.transform);
+            this.transform.LookAt(Character.transform, Vector3.up);
         //}
 
         this.transform.RotateAround(Character.transform.position, Character.transform.position, -(Input.GetAxis("Mouse Y")));

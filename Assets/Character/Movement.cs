@@ -9,32 +9,39 @@ using System.Collections;
 
 public class Movement : MonoBehaviour
 {
-    CharacterController characterController;
+    //CharacterController characterController;
 
-    public float speed = 6.0f;
-    public float jumpSpeed = 8.0f;
-    public float gravity = 20.0f;
+    //public float speed = 6.0f;
+    //public float jumpSpeed = 8.0f;
+    //public float gravity = 20.0f;
 
-    private Vector3 moveDirection = Vector3.zero;
+    public float x = 0;
+    public float z = 0;
+
+    //private Vector3 moveDirection = Vector3.zero;
 
     private Animator animator;
+    private Rigidbody rigidBody;
 
     void Start()
     {
-        characterController = GetComponent<CharacterController>();
+        //characterController = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
+        rigidBody = GetComponent<Rigidbody>();
     }
 
     void Update()
     {
-        var x = Input.GetAxis("Horizontal");
-        var z = Input.GetAxis("Vertical");
+        x = Input.GetAxis("Horizontal");
+        z = Input.GetAxis("Vertical");
 
         animator.SetFloat("Run", z);
         animator.SetFloat("Turn", x, 1f, Time.deltaTime * 5f);
 
 
-        if (z != 0)
-        transform.Translate(x *.03f, 0, z * .07f);
+        //if (z != 0)
+            transform.Translate(x *.09f, 0, z * .09f);
+        //    rigidBody.velocity = transform.forward * z;
+    
     }
 }
