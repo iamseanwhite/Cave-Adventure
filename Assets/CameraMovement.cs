@@ -9,36 +9,41 @@ public class CameraMovement : MonoBehaviour {
     public GameObject Character;
     public Terrain terrain;
 
-    public float yaw = 0.0f;
-    public float pitch = 0.0f;
-    private Transform characterTransformOld;
+    //public float yaw = 0.0f;
+    //public float pitch = 0.0f;
+    //private Transform characterTransformOld;
 
     // Use this for initialization
     void Start ()
     {
-        characterTransformOld = Character.transform;
+        //characterTransformOld = Character.transform;
         this.transform.LookAt(Character.transform);
         Cursor.visible = false;
     }
 	
 	// Update is called once per frame
 	void LateUpdate()
-    {
+    {   
+        //rotation
+        this.transform.LookAt(Character.transform, Vector3.up);
+        
+        //vertical revolution
+        var path = Character.transform.position - this.transform.position;
+        Vector3 perpendicular = Vector3.Cross(path, Vector3.up);
+        this.transform.RotateAround(Character.transform.position, perpendicular, (Input.GetAxis("Mouse Y")));
 
-        //if (Character.transform.position == characterTransformOld.position && Character.transform != characterTransformOld) { 
-            this.transform.LookAt(Character.transform, Vector3.up);
-        //}
-
-        this.transform.RotateAround(Character.transform.position, Character.transform.position, -(Input.GetAxis("Mouse Y")));
+        //horizonal revolultion
         this.transform.RotateAround(Character.transform.position, Vector3.up, (Input.GetAxis("Mouse X")));
 
-        if (Input.GetAxis("Mouse ScrollWheel") > 0f)
+        //zoom in
+        if (Input.GetAxis("Mouse ScrollWheel") > 0f && (Vector3.Distance(this.transform.position, Character.transform.position) > 3))
             this.transform.position = (this.transform.position + Character.transform.position) / 2;
 
-        if (Input.GetAxis("Mouse ScrollWheel") < 0f)
+        //zoom out
+        if (Input.GetAxis("Mouse ScrollWheel") < 0f && (Vector3.Distance(this.transform.position, Character.transform.position) < 50))
             this.transform.position += (this.transform.position - Character.transform.position);
 
-        characterTransformOld = Character.transform;
+        //characterTransformOld = Character.transform;
 
         //yaw += HorizontalSpeed * Input.GetAxis("Mouse X");
         //pitch -= VerticalSpeed * Input.GetAxis("Mouse Y");

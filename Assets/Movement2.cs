@@ -26,8 +26,8 @@ public class Movement2 : MonoBehaviour {
         x = Input.GetAxis("Horizontal");
         z = Input.GetAxis("Vertical");
 
-        animator.SetFloat("Run", z);
-        animator.SetFloat("Turn", x, 1f, Time.deltaTime * 5f);
+        animator.SetFloat("Run", z, .1f, Time.deltaTime );
+        animator.SetFloat("Turn", x, 1f, Time.deltaTime );
      
         transform.rotation *= Quaternion.AngleAxis(rotateVelocity * x , Vector3.up);
         
@@ -35,7 +35,12 @@ public class Movement2 : MonoBehaviour {
 
     void FixedUpdate()
     {
-        Vector3 movement = transform.forward * 5 *z;
+        Vector3 movement;
+        if (z > 0)
+            movement = transform.forward * 5 * z;
+        else
+            movement = transform.forward * 2 * z;
+
         movement.y = rigidBody.velocity.y;
         rigidBody.velocity = movement;
     }
