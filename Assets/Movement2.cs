@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Movement2 : MonoBehaviour {
 
@@ -31,8 +32,10 @@ public class Movement2 : MonoBehaviour {
 	void LateUpdate () {
 
         //if (x > .1 || z > .1) animator.SetBool("Attack", false);
-
-        
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+            SceneManager.LoadScene(0);
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+            SceneManager.LoadScene(1);
 
         if (!this.animator.GetCurrentAnimatorStateInfo(0).IsName("Unarmed-Attack-L3"))
         {
