@@ -36,6 +36,8 @@ public class Movement2 : MonoBehaviour {
             SceneManager.LoadScene(0);
         if (Input.GetKeyDown(KeyCode.Alpha3))
             SceneManager.LoadScene(1);
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+            SceneManager.LoadScene(2);
 
         if (!this.animator.GetCurrentAnimatorStateInfo(0).IsName("Unarmed-Attack-L3"))
         {
