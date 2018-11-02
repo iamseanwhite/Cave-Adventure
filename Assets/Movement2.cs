@@ -10,7 +10,7 @@ public class Movement2 : MonoBehaviour {
     //float forwardInput, turnInput;
     public float x = 0;
     public float z = 0;
-
+    public GameObject myCamera;
     private Animator animator;
     Rigidbody rigidBody;
     AudioSource footstep;
@@ -47,9 +47,7 @@ public class Movement2 : MonoBehaviour {
 
             animator.SetFloat("Run", z, .05f, Time.deltaTime );
             animator.SetFloat("Turn", x, 1f, Time.deltaTime * 5 );
-        
-        
-
+              
             transform.rotation *= Quaternion.AngleAxis(rotateVelocity * x , Vector3.up);
         }
 
@@ -80,8 +78,11 @@ public class Movement2 : MonoBehaviour {
         
     }
 
-    //void PlayFootstep()
-    //{
-    //    footstep.Play();
-    //}
+    void FootstepEvent()
+    {
+        footstep.pitch = UnityEngine.Random.Range(.8f, 1.2f);
+        footstep.volume = UnityEngine.Random.Range(.7f, 1f);
+        footstep.volume -= .03f * (Vector3.Distance(myCamera.transform.position, this.transform.position));
+        footstep.Play();
+    }
 }
