@@ -46,7 +46,7 @@ public class Movement2 : MonoBehaviour {
             z = Input.GetAxis("Vertical");
 
             animator.SetFloat("Run", z, .05f, Time.deltaTime );
-            animator.SetFloat("Turn", x, 1f, Time.deltaTime * 5 );
+            animator.SetFloat("Turn", x, 1f, Time.deltaTime * 10 );
               
             transform.rotation *= Quaternion.AngleAxis(rotateVelocity * x , Vector3.up);
         }

@@ -4,30 +4,42 @@ using UnityEngine;
 
 public class TiggerTriggers : MonoBehaviour {
 
-    public GameObject character;
+    public GameObject Melvin;
+    public GameObject Girl;
 
     Animator animator;
     Rigidbody rigidBody;
-	
-    // Use this for initialization
-	void Start () {
+    Vector3 tigerMovemement;
+    Collider girlCollider, tigerCollider;
+    
+    void Start () {
         animator = GetComponent<Animator>();
-        rigidBody = GetComponent<Rigidbody>();
+        rigidBody = GetComponent<Rigidbody>();      
     }
 	
-	// Update is called once per frame
 	void Update () {
 
-        if (Vector3.Distance(character.transform.position, this.transform.position) < 40)
+        //when Melvin is close enough
+        if (Vector3.Distance(Melvin.transform.position, this.transform.position) < 40)
         {
+            //start running towards girl
             animator.SetBool("IsClose", true);
+            this.transform.LookAt(Girl.transform, Vector3.up);
+            tigerMovemement = transform.forward * 5;
+            
+            //while account for gravity
+            tigerMovemement.y = rigidBody.velocity.y;
+            rigidBody.velocity = tigerMovemement;
 
-            Vector3 movement;
-           
-            movement = transform.forward * 5;
-
-            movement.y = rigidBody.velocity.y;
-            rigidBody.velocity = movement;
+            //and when they meet, start attacking
+            if (Vector3.Distance(Girl.transform.position, this.transform.position) < 3)
+            {
+                Random.InitState(System.DateTime.Now.Millisecond);
+                int randomNumber = Random.Range(1, 2);
+                animator.SetBool("Attack" + randomNumber, true);
+            }
         }
 	}
+
+
 }
