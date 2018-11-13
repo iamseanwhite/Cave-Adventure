@@ -23,26 +23,34 @@ public class CameraMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void LateUpdate()
-    {   
-        //rotation
-        this.transform.LookAt(Character.transform, Vector3.up);
-        
-        //vertical revolution
-        var path = Character.transform.position - this.transform.position;
-        Vector3 perpendicular = Vector3.Cross(path, Vector3.up);
-        this.transform.RotateAround(Character.transform.position, perpendicular, (Input.GetAxis("Mouse Y")));
+    {
+        if (!Input.GetButton("Fire1"))
+        {
+            Cursor.visible = false;
+            //rotation
+            this.transform.LookAt(Character.transform, Vector3.up);
 
-        //horizonal revolultion
-        this.transform.RotateAround(Character.transform.position, Vector3.up, (Input.GetAxis("Mouse X")));
+            //vertical revolution
+            var path = Character.transform.position - this.transform.position;
+            Vector3 perpendicular = Vector3.Cross(path, Vector3.up);
+            this.transform.RotateAround(Character.transform.position, perpendicular, (Input.GetAxis("Mouse Y")));
 
-        //zoom in
-        if (Input.GetAxis("Mouse ScrollWheel") > 0f && (Vector3.Distance(this.transform.position, Character.transform.position) > 3))
-            this.transform.position = (this.transform.position + Character.transform.position) / 2;
+            //horizonal revolultion
+            this.transform.RotateAround(Character.transform.position, Vector3.up, (Input.GetAxis("Mouse X")));
 
-        //zoom out
-        if (Input.GetAxis("Mouse ScrollWheel") < 0f && (Vector3.Distance(this.transform.position, Character.transform.position) < 50))
-            this.transform.position += (this.transform.position - Character.transform.position);
+            //zoom in
+            if (Input.GetAxis("Mouse ScrollWheel") > 0f && (Vector3.Distance(this.transform.position, Character.transform.position) > 3))
+                this.transform.position = (this.transform.position + Character.transform.position) / 2;
 
+            //zoom out
+            if (Input.GetAxis("Mouse ScrollWheel") < 0f && (Vector3.Distance(this.transform.position, Character.transform.position) < 50))
+                this.transform.position += (this.transform.position - Character.transform.position);
+        }
+
+        else
+        {
+            Cursor.visible = true;
+        }
         //characterTransformOld = Character.transform;
 
         //yaw += HorizontalSpeed * Input.GetAxis("Mouse X");
