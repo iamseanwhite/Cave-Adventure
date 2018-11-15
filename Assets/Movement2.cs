@@ -49,7 +49,7 @@ public class Movement2 : MonoBehaviour {
             animator.SetFloat("Turn", x, 1f, Time.deltaTime * 10 );
               
             transform.rotation *= Quaternion.AngleAxis(rotateVelocity * x , Vector3.up);
-        }
+        }        
 
     }
 
