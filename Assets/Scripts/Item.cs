@@ -3,6 +3,7 @@
 [CreateAssetMenu]
 public class Item : ScriptableObject
 {
-    public Sprite sprite;
-    public GameObject itemObject;
+    new public string name = "New Item";
+    public Sprite sprite = null;
+    public bool isEquiped = false;
 }
