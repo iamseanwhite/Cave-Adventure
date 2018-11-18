@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Rock
+  - UI
+  - Inventory
   layers:
   - Default
   - TransparentFX

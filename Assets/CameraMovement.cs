@@ -23,12 +23,13 @@ public class CameraMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void LateUpdate()
-    {
-        if (!Input.GetButton("Fire1"))
-        {
-            Cursor.visible = false;
+    {                    
             //rotation
             this.transform.LookAt(Character.transform, Vector3.up);
+
+        if (!Input.GetButton("Fire3"))
+        {
+            Cursor.visible = false;
 
             //vertical revolution
             var path = Character.transform.position - this.transform.position;

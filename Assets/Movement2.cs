@@ -32,12 +32,20 @@ public class Movement2 : MonoBehaviour {
 	void LateUpdate () {
 
         //if (x > .1 || z > .1) animator.SetBool("Attack", false);
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        if (Input.GetKeyDown(KeyCode.Alpha8))
+        {            
             SceneManager.LoadScene(0);
-        if (Input.GetKeyDown(KeyCode.Alpha3))
+        }
+            
+        if (Input.GetKeyDown(KeyCode.Alpha9))
+        {           
             SceneManager.LoadScene(1);
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+        {           
             SceneManager.LoadScene(2);
+        }
 
         if (!this.animator.GetCurrentAnimatorStateInfo(0).IsName("Unarmed-Attack-L3"))
         {
@@ -49,17 +57,22 @@ public class Movement2 : MonoBehaviour {
             animator.SetFloat("Turn", x, 1f, Time.deltaTime * 10 );
               
             transform.rotation *= Quaternion.AngleAxis(rotateVelocity * x , Vector3.up);
-        }        
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (!Input.GetButton("Fire3"))
+            {
+                Debug.Log(!Input.GetButton("Fire1"));
+                animator.SetBool("Attack", true);
+                isAttacking = true;
+            }
+        }
 
     }
 
     void FixedUpdate()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            animator.SetBool("Attack", true);
-            isAttacking = true;
-        }
+    {        
 
         if (!this.animator.GetCurrentAnimatorStateInfo(0).IsName("Unarmed-Attack-L3"))
         {
