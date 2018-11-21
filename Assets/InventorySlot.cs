@@ -28,4 +28,9 @@ public class InventorySlot : MonoBehaviour {
         Debug.Log("In OnRemoveButton");
         Inventory.instance.Remove(item);        
     }
+
+    void Update()
+    {
+        
+    }
 }

@@ -18,11 +18,38 @@ public class Inventory : MonoBehaviour {
     private GameObject character;
     public delegate void OnItemChanged();
     public OnItemChanged onItemChangedCallback;
+    public GameObject rapier;
 
     public int capacity = 6;
     public List<Item> items = new List<Item>();
         
-
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            ToggleEquip(1);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            ToggleEquip(2);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            ToggleEquip(3);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            ToggleEquip(4);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            ToggleEquip(5);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha6))
+        {
+            ToggleEquip(6);
+        }
+    }
     public bool Add(Item item)
     {
         if (items.Count < capacity)
@@ -46,7 +73,26 @@ public class Inventory : MonoBehaviour {
         Debug.Log("After Instantiate");
         items.Remove(item);
 
+        if (item.name =="Rapier")
+        {
+            item.isEquipped = !item.isEquipped;
+            rapier.SetActive(false);
+        }
+
         if (onItemChangedCallback != null)
             onItemChangedCallback.Invoke();
+    }
+
+    void ToggleEquip(int key)
+    {
+        int slot = key - 1;
+        var item = Inventory.instance.items[slot];
+
+        if (item != null && item.isEquipable)
+        {
+            item.isEquipped = !item.isEquipped;
+            if (item.name == "Rapier")
+                rapier.SetActive(!rapier.activeSelf);
+        }
     }
 }

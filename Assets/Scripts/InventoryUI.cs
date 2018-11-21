@@ -2,7 +2,8 @@
 
 public class InventoryUI : MonoBehaviour {
 
-    public Transform itemsParent;
+    public Transform itemsParent;   
+    //private GameObject rapier;
 
     Inventory inventory;
 
@@ -13,12 +14,13 @@ public class InventoryUI : MonoBehaviour {
         inventory = Inventory.instance;
         inventory.onItemChangedCallback += UpdateUI;
         slots = itemsParent.GetComponentsInChildren<InventorySlot>();
-	}
+        //rapier = GameObject.FindGameObjectWithTag("Rapier");
+    }
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+        
+    }
 
     void UpdateUI()
     {
@@ -34,4 +36,6 @@ public class InventoryUI : MonoBehaviour {
             }
         }
     }
+
+    
 }
