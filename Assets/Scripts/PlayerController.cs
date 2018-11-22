@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Movement2 : MonoBehaviour {
+public class PlayerController : MonoBehaviour {
 
     public float rotateVelocity = 1;
     //float forwardInput, turnInput;
@@ -46,6 +46,7 @@ public class Movement2 : MonoBehaviour {
         {           
             SceneManager.LoadScene(2);
         }
+        
 
         if (!this.animator.GetCurrentAnimatorStateInfo(0).IsName("Unarmed-Attack-L3"))
         {
@@ -93,9 +94,9 @@ public class Movement2 : MonoBehaviour {
 
     void FootstepEvent()
     {
-        footstep.pitch = UnityEngine.Random.Range(.8f, 1.2f);
-        footstep.volume = UnityEngine.Random.Range(.7f, 1f);
-        footstep.volume -= .03f * (Vector3.Distance(myCamera.transform.position, this.transform.position));
+        footstep.pitch = UnityEngine.Random.Range(.9f, 1.2f);
+        footstep.volume = UnityEngine.Random.Range(.75f, 1f);
+        //footstep.volume -= .03f * (Vector3.Distance(myCamera.transform.position, this.transform.position));
         footstep.Play();
     }
 }

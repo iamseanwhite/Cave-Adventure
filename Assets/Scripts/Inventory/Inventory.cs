@@ -27,27 +27,27 @@ public class Inventory : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            ToggleEquip(1);
+            UseItem(1);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            ToggleEquip(2);
+            UseItem(2);
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            ToggleEquip(3);
+            UseItem(3);
         }
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
-            ToggleEquip(4);
+            UseItem(4);
         }
         if (Input.GetKeyDown(KeyCode.Alpha5))
         {
-            ToggleEquip(5);
+            UseItem(5);
         }
         if (Input.GetKeyDown(KeyCode.Alpha6))
         {
-            ToggleEquip(6);
+            UseItem(6);
         }
     }
     public bool Add(Item item)
@@ -83,16 +83,20 @@ public class Inventory : MonoBehaviour {
             onItemChangedCallback.Invoke();
     }
 
-    void ToggleEquip(int key)
+
+    void UseItem(int key)
     {
         int slot = key - 1;
-        var item = Inventory.instance.items[slot];
+        var item = items[slot];
 
         if (item != null && item.isEquipable)
-        {
-            item.isEquipped = !item.isEquipped;
-            if (item.name == "Rapier")
-                rapier.SetActive(!rapier.activeSelf);
-        }
+            ToggleEquip(item);
+    }
+
+    void ToggleEquip(Item item)
+    {              
+        item.isEquipped = !item.isEquipped;
+        if (item.name == "Rapier")
+            rapier.SetActive(!rapier.activeSelf);        
     }
 }
