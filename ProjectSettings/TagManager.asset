@@ -5,6 +5,13 @@ TagManager:
   serializedVersion: 2
   tags:
   - Rock
+  - Torch1
+  - Torch2
+  - Torch3
+  - Big Spider
+  - Treasure
+  - Pickup Torch
+  - SpikesCollider
   layers:
   - Default
   - TransparentFX

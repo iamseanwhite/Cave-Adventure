@@ -26,12 +26,11 @@ public class arch_Trigger : MonoBehaviour {
 
         Debug.Log(other.name + "Has Entered");
 
-        if (other.name != "Rock1")
+        if (other.name == "ThirdPersonController")
         {
-            if (other.name != "Rock2"){
+         
                 rollers = GameObject.FindGameObjectsWithTag("Rock");
                 InvokeRepeating("Roll", 1, 1);
-            }
         }
         // myTransform.position = Vector3.up * Time.time;
     }
