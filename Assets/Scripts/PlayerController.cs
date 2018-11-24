@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour {
 
+    public float rotateVelocity;
     //float forwardInput, turnInput;
     public float x = 0;
     public float z = 0;
@@ -56,6 +57,8 @@ public class PlayerController : MonoBehaviour {
             animator.SetFloat("Run", z, .05f, Time.deltaTime );
             animator.SetFloat("Turn", x, 1f, Time.deltaTime * 10 );
 
+            //transform.rotation *= Quaternion.AngleAxis(x, Vector3.up);
+            transform.Rotate(Vector3.up * rotateVelocity * x * Time.deltaTime);
         }
 
         if (Input.GetMouseButtonDown(0))

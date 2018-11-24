@@ -24,6 +24,22 @@ public class TiggerTriggers : MonoBehaviour {
         {
             animator.SetBool("IsClose", true);
 
+            if (Vector3.Distance(Melvin.transform.position, this.transform.position) > 2)
+            {
+                //start running towards girl               
+                var targetRotation = Quaternion.LookRotation(Girl.transform.position - transform.position);
+                tigerMovemement = transform.forward * 5;
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 5 * Time.deltaTime);
+            }
+
+            else
+            {
+                //run towards melvin
+                var targetRotation = Quaternion.LookRotation(Melvin.transform.position - transform.position);
+                tigerMovemement = transform.forward * 5;
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 5 * Time.deltaTime);
+            }
+
             //while account for gravity
             tigerMovemement.y = rigidBody.velocity.y;
             rigidBody.velocity = tigerMovemement;
@@ -35,6 +51,7 @@ public class TiggerTriggers : MonoBehaviour {
                 int randomNumber = Random.Range(1, 2);
                 animator.SetBool("Attack" + randomNumber, true);
             }
+            
             
         }
 	}
