@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.ImageEffects;
 
 public class TiggerTriggers : MonoBehaviour {
 
@@ -11,10 +12,14 @@ public class TiggerTriggers : MonoBehaviour {
     Rigidbody rigidBody;
     Vector3 tigerMovemement;
     Collider girlCollider, tigerCollider;
+    Camera mainCamera;
+
+    bool isLookingAtMelvin = false;
     
     void Start () {
         animator = GetComponent<Animator>();
-        rigidBody = GetComponent<Rigidbody>();      
+        rigidBody = GetComponent<Rigidbody>();
+        mainCamera = Camera.main;
     }
 	
 	void Update () {
@@ -50,6 +55,7 @@ public class TiggerTriggers : MonoBehaviour {
                 {
                     animator.SetBool("Attack1", true);
                     animator.SetBool("TooFarToAttack", false);
+                    isLookingAtMelvin = true;
                 }
                 else
                 { 
@@ -72,21 +78,30 @@ public class TiggerTriggers : MonoBehaviour {
                 Random.InitState(System.DateTime.Now.Millisecond);
                 int randomNumber = Random.Range(1, 2);
                 animator.SetBool("Attack" + randomNumber, true);
+                isLookingAtMelvin = false;
                 //animator.SetBool("TooFarToAttack", false);                
             }
 
             if (animator.GetCurrentAnimatorStateInfo(0).IsName("hit"))
             {
-                tigerMovemement = transform.forward * .1f;
+                tigerMovemement = transform.forward * .1f;                                
             }
             else
             {
                 tigerMovemement = transform.forward * 5f;
-            }
-            
+            }                        
             
         }
 	}
+
+    void DamageEvent()
+    {
+        if (isLookingAtMelvin == true)
+        { 
+            PlayerHealth.instance.TakeHit(10);
+            //mainCamera.GetComponent<CameraMotionBlur>().enabled = true;
+        }
+    }
 
 
 }
