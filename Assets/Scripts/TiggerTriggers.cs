@@ -22,22 +22,20 @@ public class TiggerTriggers : MonoBehaviour {
         //when Melvin is close enough
         if (Vector3.Distance(Melvin.transform.position, this.transform.position) < 40)
         {
-            //start running towards girl
             animator.SetBool("IsClose", true);
-            this.transform.LookAt(Girl.transform, Vector3.up);
-            tigerMovemement = transform.forward * 5;
-            
+
             //while account for gravity
             tigerMovemement.y = rigidBody.velocity.y;
             rigidBody.velocity = tigerMovemement;
 
-            //and when they meet, start attacking
+            //and when they meet, start attacking her
             if (Vector3.Distance(Girl.transform.position, this.transform.position) < 3)
             {
                 Random.InitState(System.DateTime.Now.Millisecond);
                 int randomNumber = Random.Range(1, 2);
                 animator.SetBool("Attack" + randomNumber, true);
             }
+            
         }
 	}
 

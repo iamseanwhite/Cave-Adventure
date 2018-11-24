@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour {
 
-    public float rotateVelocity = 1;
     //float forwardInput, turnInput;
     public float x = 0;
     public float z = 0;
@@ -56,8 +55,7 @@ public class PlayerController : MonoBehaviour {
 
             animator.SetFloat("Run", z, .05f, Time.deltaTime );
             animator.SetFloat("Turn", x, 1f, Time.deltaTime * 10 );
-              
-            transform.rotation *= Quaternion.AngleAxis(rotateVelocity * x , Vector3.up);
+
         }
 
         if (Input.GetMouseButtonDown(0))
@@ -68,6 +66,16 @@ public class PlayerController : MonoBehaviour {
                 animator.SetBool("Attack", true);
                 isAttacking = true;
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            PlayerHealth.instance.TakeHit(9);
+        }
+
+        if (PlayerHealth.instance.currentHealth == 0)
+        {
+            Debug.Log("You Died");
         }
 
     }
