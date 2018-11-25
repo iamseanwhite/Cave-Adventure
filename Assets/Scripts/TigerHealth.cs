@@ -36,6 +36,7 @@ public class TigerHealth : MonoBehaviour {
         //Debug.Log("current health calculation: " + currentHealth);
         //Debug.Log("healthtotal calculation: " + healthTotal);
         //Debug.Log("health calculation: " + ((currentHealth / 100.0f)* healthTotal));
-        healthBar.rectTransform.sizeDelta = new Vector2((currentHealth/ 100.0f) * healthTotal , 20);
+        healthBar.rectTransform.sizeDelta = new Vector2((currentHealth / 100.0f) * healthTotal, 20);
+
     }
 }
