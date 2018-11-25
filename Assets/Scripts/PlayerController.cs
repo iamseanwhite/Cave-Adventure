@@ -98,6 +98,8 @@ public class PlayerController : MonoBehaviour {
         
             movement.y = rigidBody.velocity.y;
             rigidBody.velocity = movement;
+
+            //transform.Rotate(Vector3.up * rotateVelocity * x);
         }
 
         

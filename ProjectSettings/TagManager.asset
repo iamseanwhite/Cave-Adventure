@@ -9,6 +9,7 @@ TagManager:
   - Inventory
   - Rapier
   - Tiger
+  - RunToPoint
   layers:
   - Default
   - TransparentFX

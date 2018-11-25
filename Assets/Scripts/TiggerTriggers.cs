@@ -120,6 +120,7 @@ public class TiggerTriggers : MonoBehaviour {
         var targetRotation = Quaternion.LookRotation(RunawayPoint.transform.position - transform.position);
         //tigerMovemement = transform.forward * 3;
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 5 * Time.deltaTime);
+        Girl.GetComponent<Animator>().SetBool("IsBeingChased", false);
     }
 
     void DamageEvent()
