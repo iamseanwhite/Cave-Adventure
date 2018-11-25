@@ -10,6 +10,7 @@ TagManager:
   - Rapier
   - Tiger
   - RunToPoint
+  - Terrain
   layers:
   - Default
   - TransparentFX

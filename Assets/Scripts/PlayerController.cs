@@ -107,9 +107,17 @@ public class PlayerController : MonoBehaviour {
 
     void FootstepEvent()
     {
-        footstep.pitch = UnityEngine.Random.Range(.9f, 1.2f);
-        footstep.volume = UnityEngine.Random.Range(.75f, 1f);
-        //footstep.volume -= .03f * (Vector3.Distance(myCamera.transform.position, this.transform.position));
-        footstep.Play();
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, .3f))
+        {
+            var floortag = hit.collider.gameObject.tag;
+            if (floortag == "Terrain")
+            {
+                footstep.pitch = UnityEngine.Random.Range(.9f, 1.2f);
+                footstep.volume = UnityEngine.Random.Range(.75f, 1f);                
+                footstep.Play();
+
+            }
+        }               
     }
 }
