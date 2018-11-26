@@ -10,10 +10,12 @@ public class Inventory : MonoBehaviour {
     void Awake()
     {
         instance = this;
+        Debug.Log("in awake");
+        DontDestroyOnLoad(GameObject.FindWithTag("UI"));
         character = GameObject.FindWithTag("Player");
-        //DontDestroyOnLoad(GameObject.FindWithTag("UI"));
     }
     #endregion
+
 
     private GameObject character;
     public delegate void OnItemChanged();
@@ -23,6 +25,13 @@ public class Inventory : MonoBehaviour {
 
     public int capacity = 6;
     public List<Item> items = new List<Item>();
+
+    void OnLevelWasLoaded()
+    {
+        Debug.Log("in OnLevelWasLoaded");
+        Debug.Log("player is " + GameObject.FindWithTag("Player").name);
+        character = GameObject.FindWithTag("Player");        
+    }
         
     void Update()
     {
@@ -67,7 +76,7 @@ public class Inventory : MonoBehaviour {
 
     public void Remove(Item item)
     {
-        Debug.Log("Removing Item");
+        Debug.Log("Removing Item.......");
         Debug.Log("character transform: " + character.transform.position);
 
         Instantiate(item.gameObject, character.transform.position + new Vector3(1,1,0), Quaternion.identity);
