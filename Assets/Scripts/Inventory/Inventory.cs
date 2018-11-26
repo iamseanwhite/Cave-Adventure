@@ -12,6 +12,7 @@ public class Inventory : MonoBehaviour {
         instance = this;
         Debug.Log("in awake");
         DontDestroyOnLoad(GameObject.FindWithTag("UI"));
+        character = GameObject.FindWithTag("Player");
     }
     #endregion
 

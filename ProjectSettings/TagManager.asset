@@ -11,6 +11,7 @@ TagManager:
   - Tiger
   - RunToPoint
   - Terrain
+  - Water
   layers:
   - Default
   - TransparentFX

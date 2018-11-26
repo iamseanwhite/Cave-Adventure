@@ -13,11 +13,13 @@ public class PlayerController : MonoBehaviour {
     public GameObject myCamera;
     private Animator animator;
     Rigidbody rigidBody;
-    AudioSource footstep;
+    AudioSource footstepSand;
+    AudioSource footstepWater;
 
     float timeStart = 0;
     float timeEnd = 0;
     bool isAttacking = false;
+    float waterLevel;
     //Quaternion rotation;
 	
     // Use this for initialization
@@ -25,11 +27,20 @@ public class PlayerController : MonoBehaviour {
 
         animator = GetComponent<Animator>();
         rigidBody = GetComponent<Rigidbody>();
-        footstep = GetComponent<AudioSource>();
-	}
-	
-	// Update is called once per frame
-	void LateUpdate () {
+
+        var audioSources = GetComponents<AudioSource>();
+        footstepSand = audioSources[0];
+        footstepWater = audioSources[1];
+        waterLevel = SceneManager.GetActiveScene().name == "Island" ? 78.6f : 9f;
+    }
+
+    void OnLevelWasLoaded()
+    {
+        waterLevel = SceneManager.GetActiveScene().name == "Island" ? 78.6f : 9f;
+    }
+
+    // Update is called once per frame
+    void LateUpdate () {
 
         //if (x > .1 || z > .1) animator.SetBool("Attack", false);
         if (Input.GetKeyDown(KeyCode.Alpha8))
@@ -111,13 +122,28 @@ public class PlayerController : MonoBehaviour {
         if (Physics.Raycast(transform.position, Vector3.down, out hit, .3f))
         {
             var floortag = hit.collider.gameObject.tag;
-            if (floortag == "Terrain")
+
+            if (transform.position.y <= waterLevel)
             {
-                footstep.pitch = UnityEngine.Random.Range(.9f, 1.2f);
-                footstep.volume = UnityEngine.Random.Range(.75f, 1f);                
-                footstep.Play();
+                footstepWater.pitch = UnityEngine.Random.Range(.95f, 1.2f);
+                footstepWater.volume = UnityEngine.Random.Range(.1f, .35f);
+                footstepWater.Play();
 
             }
+            else if (floortag == "Terrain")
+            {
+                footstepSand.pitch = UnityEngine.Random.Range(.9f, 1.2f);
+                footstepSand.volume = UnityEngine.Random.Range(.75f, 1f);
+                footstepSand.Play();
+
+            }
+
+            //if (floortag == "Water")
+            //{
+            //    footstepWater.pitch = UnityEngine.Random.Range(.9f, 1.2f);
+            //    footstepWater.volume = UnityEngine.Random.Range(.75f, 1f);
+            //    footstepWater.Play();
+            //}
         }               
     }
 }
