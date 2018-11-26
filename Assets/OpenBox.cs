@@ -20,7 +20,7 @@ public class OpenBox : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
 
-        if (other.name == "ThirdPersonController")
+        if (other.name == "Player")
         {
 
             anim.SetBool("isOpen", true);

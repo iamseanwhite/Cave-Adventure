@@ -67,6 +67,13 @@ public class Chase : MonoBehaviour {
                 _navMeshAgent.SetDestination(this.transform.position);
                 anim.SetBool("isAttacking", true);
                 anim.SetBool("isWalking", false);
+                PlayerHealth.instance.TakeHit(9);
+
+                if (PlayerHealth.instance.currentHealth == 0)
+                {
+                    Debug.Log("You Died");
+                    FindObjectOfType<GameManager>().EndGame();
+                }
 
             }
 

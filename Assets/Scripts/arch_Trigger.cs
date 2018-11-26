@@ -26,7 +26,7 @@ public class arch_Trigger : MonoBehaviour {
 
         Debug.Log(other.name + "Has Entered");
 
-        if (other.name == "ThirdPersonController")
+        if (other.name == "Player")
         {
          
                 rollers = GameObject.FindGameObjectsWithTag("Rock");

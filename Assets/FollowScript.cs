@@ -69,6 +69,14 @@ public class FollowScript : MonoBehaviour
                 anim.SetBool("isWalking", false);
                 anim.SetBool("isTaunting", false);
                 anim.SetBool("isRunning", false);
+
+                PlayerHealth.instance.TakeHit(9);
+
+                if (PlayerHealth.instance.currentHealth == 0)
+                {
+                    Debug.Log("You Died");
+                    FindObjectOfType<GameManager>().EndGame();
+                }
             }
 
         }

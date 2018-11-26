@@ -19,6 +19,7 @@ public class Inventory : MonoBehaviour {
     public delegate void OnItemChanged();
     public OnItemChanged onItemChangedCallback;
     public GameObject rapier;
+    public GameObject torch;
 
     public int capacity = 6;
     public List<Item> items = new List<Item>();
@@ -79,6 +80,13 @@ public class Inventory : MonoBehaviour {
             rapier.SetActive(false);
         }
 
+        if (item.name == "Torch")
+        {
+            item.isEquipped = !item.isEquipped;
+            torch.SetActive(false);
+            Debug.Log("Torch equipped");
+        }
+
         if (onItemChangedCallback != null)
             onItemChangedCallback.Invoke();
     }
@@ -97,6 +105,10 @@ public class Inventory : MonoBehaviour {
     {              
         item.isEquipped = !item.isEquipped;
         if (item.name == "Rapier")
-            rapier.SetActive(!rapier.activeSelf);        
+            rapier.SetActive(!rapier.activeSelf);
+
+        if (item.name == "Torch")
+            torch.SetActive(!torch.activeSelf);
+            Debug.Log("torch active");
     }
 }
