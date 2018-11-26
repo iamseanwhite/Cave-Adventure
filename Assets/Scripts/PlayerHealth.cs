@@ -45,8 +45,9 @@ public class PlayerHealth : PlayerController {
 
     void Die()
     {
+        Debug.Log("Setting IsDead to true");
         animator.SetBool("IsDead", true);
-        InvokeRepeating("ReloadScene", 3f, 2f);       
+        Invoke("ReloadScene", 3f);       
     }
 
     void ReloadScene()
