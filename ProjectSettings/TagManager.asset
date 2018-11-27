@@ -12,6 +12,7 @@ TagManager:
   - RunToPoint
   - Terrain
   - Water
+  - RopeTriggerPoint
   layers:
   - Default
   - TransparentFX

@@ -21,6 +21,7 @@ public class Inventory : MonoBehaviour {
     public delegate void OnItemChanged();
     public OnItemChanged onItemChangedCallback;
     public GameObject rapier;
+    public GameObject rope;
 
     public int capacity = 6;
     public List<Item> items = new List<Item>();
@@ -77,9 +78,11 @@ public class Inventory : MonoBehaviour {
     {
         Debug.Log("Removing Item.......");
         Debug.Log("character transform: " + character.transform.position);
-
+  
         Instantiate(item.gameObject, character.transform.position + new Vector3(1,1,0), Quaternion.identity);
+
         Debug.Log("After Instantiate");
+
         items.Remove(item);
 
         if (item.name =="Rapier")
@@ -106,6 +109,24 @@ public class Inventory : MonoBehaviour {
     {              
         item.isEquipped = !item.isEquipped;
         if (item.name == "Rapier")
-            rapier.SetActive(!rapier.activeSelf);        
+            rapier.SetActive(!rapier.activeSelf);
+
+        if (item.name == "Rope")
+        { 
+            if (Vector3.Distance(GameObject.FindWithTag("Player").transform.position, 
+                                 GameObject.FindWithTag("RopeTriggerPoint").transform.position) <= 2)
+            { 
+                rope.SetActive(true);
+                RemoveAfterOneTimeUse(item);
+            }
+        }
+    }
+
+    void RemoveAfterOneTimeUse(Item item)
+    {
+        items.Remove(item);
+
+        if (onItemChangedCallback != null)
+            onItemChangedCallback.Invoke();
     }
 }
