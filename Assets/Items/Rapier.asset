@@ -15,4 +15,4 @@ MonoBehaviour:
   gameObject: {fileID: 1557733995057396, guid: 9b0a01a8f8d502d4f94b807416379a4d, type: 2}
   sprite: {fileID: 21300000, guid: 5fd50594014b70e48bd6993443d46b32, type: 3}
   isEquipable: 1
-  isEquipped: 1
+  isEquipped: 0

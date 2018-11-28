@@ -13,6 +13,10 @@ TagManager:
   - Terrain
   - Water
   - RopeTriggerPoint
+  - RopeExtended
+  - CavernCover
+  - ShovelTriggerPoint
+  - InHandRapier
   layers:
   - Default
   - TransparentFX

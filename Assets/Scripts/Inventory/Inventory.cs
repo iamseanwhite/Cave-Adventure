@@ -1,8 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour {
+
+    GameObject rapier, rope;
 
     #region Singleton
     public static Inventory instance;
@@ -13,15 +16,20 @@ public class Inventory : MonoBehaviour {
         Debug.Log("in awake");
         DontDestroyOnLoad(GameObject.FindWithTag("UI"));
         character = GameObject.FindWithTag("Player");
+        
     }
     #endregion
 
+     void Start()
+    {
+        rapier = Resources.FindObjectsOfTypeAll<GameObject>().FirstOrDefault(x => x.CompareTag("InHandRapier"));
+        rope = Resources.FindObjectsOfTypeAll<GameObject>().FirstOrDefault(x => x.CompareTag("RopeExtended"));
+    }
 
     private GameObject character;
     public delegate void OnItemChanged();
     public OnItemChanged onItemChangedCallback;
-    public GameObject rapier;
-    public GameObject rope;
+    
 
     public int capacity = 6;
     public List<Item> items = new List<Item>();
@@ -30,7 +38,8 @@ public class Inventory : MonoBehaviour {
     {
         Debug.Log("in OnLevelWasLoaded");
         Debug.Log("player is " + GameObject.FindWithTag("Player").name);
-        character = GameObject.FindWithTag("Player");        
+        character = GameObject.FindWithTag("Player");
+        rapier = Resources.FindObjectsOfTypeAll<GameObject>().FirstOrDefault(x => x.CompareTag("InHandRapier"));
     }
         
     void Update()
@@ -78,8 +87,11 @@ public class Inventory : MonoBehaviour {
     {
         Debug.Log("Removing Item.......");
         Debug.Log("character transform: " + character.transform.position);
-  
-        Instantiate(item.gameObject, character.transform.position + new Vector3(1,1,0), Quaternion.identity);
+
+        Debug.Log("Item is " + item);
+        Debug.Log("Item.gameobject is " + item.gameObject);
+
+        Instantiate(item.gameObject, character.transform.position + new Vector3(1,1,0), Quaternion.Euler(20, 0, 0));
 
         Debug.Log("After Instantiate");
 
@@ -98,6 +110,7 @@ public class Inventory : MonoBehaviour {
 
     void UseItem(int key)
     {
+        Debug.Log("in UseItem - rapier is " + rapier);
         int slot = key - 1;
         var item = items[slot];
 
@@ -106,17 +119,37 @@ public class Inventory : MonoBehaviour {
     }
 
     void ToggleEquip(Item item)
-    {              
+    {
+        Debug.Log("in ToggleEquip - rapier name is " + rapier.name);
         item.isEquipped = !item.isEquipped;
         if (item.name == "Rapier")
-            rapier.SetActive(!rapier.activeSelf);
+        {
+           Debug.Log("in setactive -" + rapier.activeSelf);
+
+           //rapier = Resources.FindObjectsOfTypeAll<GameObject>().FirstOrDefault(x => x.CompareTag("Rapier"));
+           rapier.SetActive(!rapier.activeSelf);
+
+           Debug.Log("in setactive -" + rapier.activeSelf);
+           Debug.Log("position -" + rapier.transform.position.x);
+        }
+            
 
         if (item.name == "Rope")
         { 
             if (Vector3.Distance(GameObject.FindWithTag("Player").transform.position, 
                                  GameObject.FindWithTag("RopeTriggerPoint").transform.position) <= 2)
-            { 
-                rope.SetActive(true);
+            {                             
+                rope.SetActive(true);                
+                RemoveAfterOneTimeUse(item);
+            }
+        }
+
+        if (item.name == "Shovel")
+        {
+            if (Vector3.Distance(GameObject.FindWithTag("Player").transform.position,
+                                 GameObject.FindWithTag("ShovelTriggerPoint").transform.position) <= 7)
+            {
+                GameObject.FindWithTag("CavernCover").SetActive(false);
                 RemoveAfterOneTimeUse(item);
             }
         }
