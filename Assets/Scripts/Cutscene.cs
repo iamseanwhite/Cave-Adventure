@@ -7,6 +7,7 @@ public class Cutscene : MonoBehaviour {
     Animator animator;
     GameObject whereToGo, House, Melvin, Door;
     bool beenToHouse = false;
+    bool voiceOverTriggered = false;
 
 	// Use this for initialization
 	void Start () {
@@ -24,6 +25,14 @@ public class Cutscene : MonoBehaviour {
         if (beenToHouse == true && Vector3.Distance(transform.position, Melvin.transform.position) < 2)
         {
             animator.SetBool("ReachedMelvin", true);
+
+            if (voiceOverTriggered == false)
+            {
+                GetComponent<AudioSource>().Play();
+                voiceOverTriggered = true;
+            }
+            
+            
         }
     }
 
