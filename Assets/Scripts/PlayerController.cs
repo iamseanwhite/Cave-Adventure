@@ -13,8 +13,7 @@ public class PlayerController : MonoBehaviour {
     public GameObject myCamera;
     private Animator animator;
     Rigidbody rigidBody;
-    AudioSource footstepSand;
-    AudioSource footstepWater;
+    AudioSource footstepSand, footstepWater, footstepDock;
 
     float timeStart = 0;
     float timeEnd = 0;
@@ -31,6 +30,7 @@ public class PlayerController : MonoBehaviour {
         var audioSources = GetComponents<AudioSource>();
         footstepSand = audioSources[0];
         footstepWater = audioSources[1];
+        footstepDock = audioSources[2];
         waterLevel = SceneManager.GetActiveScene().name == "Island" ? 78.6f : 9f;
     }
 
@@ -122,6 +122,7 @@ public class PlayerController : MonoBehaviour {
         if (Physics.Raycast(transform.position, Vector3.down, out hit, .3f))
         {
             var floortag = hit.collider.gameObject.tag;
+            Debug.Log(floortag);
 
             if (transform.position.y <= waterLevel)
             {
@@ -138,12 +139,13 @@ public class PlayerController : MonoBehaviour {
 
             }
 
-            //if (floortag == "Water")
-            //{
-            //    footstepWater.pitch = UnityEngine.Random.Range(.9f, 1.2f);
-            //    footstepWater.volume = UnityEngine.Random.Range(.75f, 1f);
-            //    footstepWater.Play();
-            //}
+            else if (floortag == "Dock")
+            {
+                footstepDock.pitch = UnityEngine.Random.Range(.8f, .9f);
+                footstepDock.volume = UnityEngine.Random.Range(.3f, .4f);
+                footstepDock.Play();
+
+            }
         }               
     }
 }
