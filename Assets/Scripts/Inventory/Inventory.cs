@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour {
 
-    GameObject rapier, rope;
+    GameObject rapier, rope, miniMapBorder;
     AudioSource rapierDraw, rapierSheath;
 
     #region Singleton
@@ -23,8 +23,10 @@ public class Inventory : MonoBehaviour {
 
      void Start()
     {
-        rapier = Resources.FindObjectsOfTypeAll<GameObject>().FirstOrDefault(x => x.CompareTag("InHandRapier"));
-        rope = Resources.FindObjectsOfTypeAll<GameObject>().FirstOrDefault(x => x.CompareTag("RopeExtended"));
+        GameObject[] allObjects = Resources.FindObjectsOfTypeAll<GameObject>();
+        rapier = allObjects.FirstOrDefault(x => x.CompareTag("InHandRapier"));
+        rope = allObjects.FirstOrDefault(x => x.CompareTag("RopeExtended"));
+        miniMapBorder = allObjects.FirstOrDefault(x => x.CompareTag("MiniMapBorder"));
         rapierDraw = rapier.GetComponent<AudioSource>();
     }
 
@@ -161,6 +163,12 @@ public class Inventory : MonoBehaviour {
                 GameObject.FindWithTag("CavernCover").SetActive(false);
                 RemoveAfterOneTimeUse(item);
             }
+        }
+
+        if (item.name == "Treasure Map" && UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Island")
+        {
+            item.isEquipped = !item.isEquipped;
+            miniMapBorder.SetActive(!miniMapBorder.activeSelf);
         }
     }
 
