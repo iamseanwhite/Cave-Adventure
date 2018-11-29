@@ -1,16 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Cutscene : MonoBehaviour {
 
     Animator animator;
-    GameObject whereToGo, House, Melvin, Door;
+    GameObject whereToGo, House, Melvin, Door, keyInHand;
+    public Item key;
+
     bool beenToHouse = false;
     bool voiceOverTriggered = false;
 
 	// Use this for initialization
 	void Start () {
+        GameObject[] allObjects = Resources.FindObjectsOfTypeAll<GameObject>();
+        keyInHand = allObjects.FirstOrDefault(x => x.CompareTag("KeyInHand"));
+
         animator = GetComponent<Animator>();
         House = GameObject.FindWithTag("RunToPoint");
         Melvin = GameObject.Find("Melvin");
@@ -30,6 +36,7 @@ public class Cutscene : MonoBehaviour {
             {
                 GetComponent<AudioSource>().Play();
                 voiceOverTriggered = true;
+                TakeKey();
             }
             
             
@@ -54,6 +61,12 @@ public class Cutscene : MonoBehaviour {
     {
         if (beenToHouse == true)
             whereToGo = Melvin;
+    }
+
+    public void TakeKey()
+    {
+        //Destroy(keyInHand);
+        //Inventory.instance.Add(key);
     }
 
     void LookTowards(GameObject destination)
