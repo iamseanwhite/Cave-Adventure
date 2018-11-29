@@ -6,6 +6,7 @@ using UnityEngine;
 public class Inventory : MonoBehaviour {
 
     GameObject rapier, rope;
+    AudioSource rapierDraw, rapierSheath;
 
     #region Singleton
     public static Inventory instance;
@@ -24,6 +25,7 @@ public class Inventory : MonoBehaviour {
     {
         rapier = Resources.FindObjectsOfTypeAll<GameObject>().FirstOrDefault(x => x.CompareTag("InHandRapier"));
         rope = Resources.FindObjectsOfTypeAll<GameObject>().FirstOrDefault(x => x.CompareTag("RopeExtended"));
+        rapierDraw = rapier.GetComponent<AudioSource>();
     }
 
     private GameObject character;
@@ -116,6 +118,12 @@ public class Inventory : MonoBehaviour {
 
         if (item != null && item.isEquipable)
             ToggleEquip(item);
+
+        if(item != null && item.name == "Coconut" && PlayerHealth.instance.currentHealth != 100)
+        {
+            PlayerHealth.instance.TakeHit(-10);
+            RemoveAfterOneTimeUse(item);
+        }
     }
 
     void ToggleEquip(Item item)
@@ -128,6 +136,7 @@ public class Inventory : MonoBehaviour {
 
            //rapier = Resources.FindObjectsOfTypeAll<GameObject>().FirstOrDefault(x => x.CompareTag("Rapier"));
            rapier.SetActive(!rapier.activeSelf);
+           rapierDraw.Play();
 
            Debug.Log("in setactive -" + rapier.activeSelf);
            Debug.Log("position -" + rapier.transform.position.x);
