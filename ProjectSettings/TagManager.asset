@@ -24,6 +24,7 @@ TagManager:
   - spider
   - Coconut
   - GateGuard
+  - Goals
   layers:
   - Default
   - TransparentFX

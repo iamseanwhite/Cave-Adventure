@@ -13308,34 +13308,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1526643526}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1528878036
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1528878037}
-  m_Layer: 0
-  m_Name: TextBox
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1528878037
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1528878036}
-  m_LocalRotation: {x: -0, y: 0.9948928, z: -0, w: 0.10093735}
-  m_LocalPosition: {x: 164.858, y: 10.17, z: 386.468}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 26
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1529494507
 GameObject:
   m_ObjectHideFlags: 0
@@ -17914,6 +17886,19 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 153068, guid: 5c80fc4442f8349969abea6c1a0f1faa,
     type: 2}
   m_PrefabInternal: {fileID: 1843389768}
+--- !u!114 &1998760920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1998760919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7aad64fbd3172c542bb998b4640ed2c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Melvin: {fileID: 0}
+  GateGuard: {fileID: 0}
 --- !u!95 &1998760921
 Animator:
   serializedVersion: 3
@@ -18323,7 +18308,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2056222140}
   m_LocalRotation: {x: 0.031778205, y: 0.046152048, z: 0.0014688835, w: -0.99842775}
-  m_LocalPosition: {x: 440.79803, y: -134.73764, z: -401.61066}
+  m_LocalPosition: {x: 166.88344, y: 6.5709743, z: 364.60614}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
