@@ -22,11 +22,13 @@ public class PlayerHealth : PlayerController {
     public int currentHealth;
     float healthTotal;
     Animator animator;
+    AudioSource deathMusic;
 
 	void Start () {
         currentHealth = initalHealth;
         healthTotal = healthBar.rectTransform.sizeDelta.x;
         animator = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
+        deathMusic = GameObject.FindGameObjectWithTag("Player").GetComponents<AudioSource>()[3];
     }
 
     public void TakeHit(int damage)
@@ -47,7 +49,8 @@ public class PlayerHealth : PlayerController {
     {
         Debug.Log("Setting IsDead to true");
         animator.SetBool("IsDead", true);
-        Invoke("ReloadScene", 3f);       
+        deathMusic.Play();
+        Invoke("ReloadScene", 4f);       
     }
 
     void ReloadScene()

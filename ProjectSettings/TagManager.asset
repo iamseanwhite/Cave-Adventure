@@ -20,6 +20,7 @@ TagManager:
   - Fire
   - MiniMapBorder
   - Dock
+  - KeyInHand
   layers:
   - Default
   - TransparentFX
