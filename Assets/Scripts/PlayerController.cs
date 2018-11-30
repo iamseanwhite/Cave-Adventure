@@ -13,16 +13,15 @@ public class PlayerController : MonoBehaviour {
     public GameObject myCamera;
     private Animator animator;
     Rigidbody rigidBody;
-    AudioSource footstepSand;
-    AudioSource footstepWater;
-    public GameObject[] enemies;
+    AudioSource footstepSand, footstepWater, footstepDock;
+  
 
     float timeStart = 0;
     float timeEnd = 0;
     bool isAttacking = false;
     float waterLevel;
     //Quaternion rotation;
-	
+
     // Use this for initialization
 	void Start () {
 
@@ -32,6 +31,7 @@ public class PlayerController : MonoBehaviour {
         var audioSources = GetComponents<AudioSource>();
         footstepSand = audioSources[0];
         footstepWater = audioSources[1];
+        footstepDock = audioSources[2];
         waterLevel = SceneManager.GetActiveScene().name == "Island" ? 78.6f : 9f;
     }
 
@@ -45,20 +45,20 @@ public class PlayerController : MonoBehaviour {
 
         //if (x > .1 || z > .1) animator.SetBool("Attack", false);
         if (Input.GetKeyDown(KeyCode.Alpha8))
-        {            
+        {
             SceneManager.LoadScene(0);
         }
-            
+
         if (Input.GetKeyDown(KeyCode.Alpha9))
-        {           
+        {
             SceneManager.LoadScene(1);
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha0))
-        {           
+        {
             SceneManager.LoadScene(2);
         }
-        
+
 
         if (!this.animator.GetCurrentAnimatorStateInfo(0).IsName("Unarmed-Attack-L3"))
         {
@@ -90,10 +90,10 @@ public class PlayerController : MonoBehaviour {
                     {
                         if (direction.magnitude > 2)
                         {
-                            
+
                            // SpiderHealth.instance.TakeHit(2);
-                           
-                          
+
+
                           //  if (SpiderHealth.instance.currentHealth == 0)
                             //{
                           //      Debug.Log("You Died");
@@ -101,7 +101,7 @@ public class PlayerController : MonoBehaviour {
                             //}
                         }
                     }
-                    
+
                 }*/
             }
         }
@@ -119,25 +119,25 @@ public class PlayerController : MonoBehaviour {
     }
 
     void FixedUpdate()
-    {        
+    {
 
         if (!this.animator.GetCurrentAnimatorStateInfo(0).IsName("Unarmed-Attack-L3"))
         {
             Vector3 movement;
-            if (z > 0) { 
+            if (z > 0) {
                 movement = transform.forward * 5 * z;
                 //InvokeRepeating("PlayFootstep", .1f, 1.0f);
             }
             else
                 movement = transform.forward * 2 * z;
-        
+
             movement.y = rigidBody.velocity.y;
             rigidBody.velocity = movement;
 
             //transform.Rotate(Vector3.up * rotateVelocity * x);
         }
 
-        
+
     }
 
     void FootstepEvent()
@@ -146,6 +146,7 @@ public class PlayerController : MonoBehaviour {
         if (Physics.Raycast(transform.position, Vector3.down, out hit, .3f))
         {
             var floortag = hit.collider.gameObject.tag;
+            Debug.Log(floortag);
 
             if (transform.position.y <= waterLevel)
             {
@@ -162,12 +163,13 @@ public class PlayerController : MonoBehaviour {
 
             }
 
-            //if (floortag == "Water")
-            //{
-            //    footstepWater.pitch = UnityEngine.Random.Range(.9f, 1.2f);
-            //    footstepWater.volume = UnityEngine.Random.Range(.75f, 1f);
-            //    footstepWater.Play();
-            //}
-        }               
+            else if (floortag == "Dock")
+            {
+                footstepDock.pitch = UnityEngine.Random.Range(.8f, .9f);
+                footstepDock.volume = UnityEngine.Random.Range(.3f, .4f);
+                footstepDock.Play();
+
+            }
+        }
     }
 }

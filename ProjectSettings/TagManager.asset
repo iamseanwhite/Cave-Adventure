@@ -14,6 +14,14 @@ TagManager:
   - RunToPoint
   - Terrain
   - Water
+  - RopeTriggerPoint
+  - RopeExtended
+  - CavernCover
+  - ShovelTriggerPoint
+  - InHandRapier
+  - Fire
+  - MiniMapBorder
+  - Dock
   layers:
   - Default
   - TransparentFX

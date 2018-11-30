@@ -8,4 +8,6 @@ public class Item : ScriptableObject
     public Sprite sprite = null;
     public bool isEquipable = false;
     public bool isEquipped = false;
+
+
 }
