@@ -20,6 +20,10 @@ TagManager:
   - Fire
   - MiniMapBorder
   - Dock
+  - Map
+  - spider
+  - Coconut
+  - GateGuard
   layers:
   - Default
   - TransparentFX
