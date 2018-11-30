@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: Torch
   m_EditorClassIdentifier: 
   name: Torch
-  gameObject: {fileID: 194608, guid: b226c2c9ed14da940b027de536630825, type: 2}
+  gameObject: {fileID: 1058869800467030, guid: 7b8c4c243c1e3914686615a3e30fc7c9, type: 2}
   sprite: {fileID: 0}
   isEquipable: 1
   isEquipped: 0

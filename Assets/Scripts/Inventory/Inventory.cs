@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour {
 
-    GameObject rapier, rope, miniMapBorder;
+    GameObject rapier, rope, miniMapBorder, torch;
     AudioSource rapierDraw, rapierSheath;
 
     #region Singleton
@@ -26,6 +26,7 @@ public class Inventory : MonoBehaviour {
         GameObject[] allObjects = Resources.FindObjectsOfTypeAll<GameObject>();
         rapier = allObjects.FirstOrDefault(x => x.CompareTag("InHandRapier"));
         rope = allObjects.FirstOrDefault(x => x.CompareTag("RopeExtended"));
+        torch = allObjects.FirstOrDefault(x => x.CompareTag("InHandTorch"));
         miniMapBorder = allObjects.FirstOrDefault(x => x.CompareTag("MiniMapBorder"));
         rapierDraw = rapier.GetComponent<AudioSource>();
     }
@@ -33,8 +34,7 @@ public class Inventory : MonoBehaviour {
     private GameObject character;
     public delegate void OnItemChanged();
     public OnItemChanged onItemChangedCallback;
-    public GameObject rapier;
-    public GameObject torch;
+    //public GameObject rapier;
     public GameObject key;
     public bool haskey = false;
     public bool hasTorch = false;
@@ -48,6 +48,7 @@ public class Inventory : MonoBehaviour {
         Debug.Log("player is " + GameObject.FindWithTag("Player").name);
         character = GameObject.FindWithTag("Player");
         rapier = Resources.FindObjectsOfTypeAll<GameObject>().FirstOrDefault(x => x.CompareTag("InHandRapier"));
+        torch = Resources.FindObjectsOfTypeAll<GameObject>().FirstOrDefault(x => x.CompareTag("InHandTorch"));
     }
 
     void Update()
@@ -155,27 +156,32 @@ public class Inventory : MonoBehaviour {
         item.isEquipped = !item.isEquipped;
 
         if (item.name == "Rapier")
-    {    rapier.SetActive(!rapier.activeSelf);
+        {   
 
            Debug.Log("in setactive -" + rapier.activeSelf);
 
            //rapier = Resources.FindObjectsOfTypeAll<GameObject>().FirstOrDefault(x => x.CompareTag("Rapier"));
            rapier.SetActive(!rapier.activeSelf);
-           rapierDraw.Play();
+           if(rapierDraw != null)
+              rapierDraw.Play();
 
            Debug.Log("in setactive -" + rapier.activeSelf);
            Debug.Log("position -" + rapier.transform.position.x);
         }
 
         if (item.name == "Torch")
-            {torch.SetActive(!torch.activeSelf);
+        {
+            torch.SetActive(!torch.activeSelf);
             Debug.Log("torch active");
-             hasTorch = true;}
+            hasTorch = true;
+        }
 
         if (item.name == "Key")
-          {  key.SetActive(!key.activeSelf);
-        Debug.Log("key active");
-        haskey = true;}
+        {
+            key.SetActive(!key.activeSelf);
+            Debug.Log("key active");
+            haskey = true;
+        }
 
 
         if (item.name == "Rope")
