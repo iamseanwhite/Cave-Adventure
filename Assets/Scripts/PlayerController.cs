@@ -14,13 +14,14 @@ public class PlayerController : MonoBehaviour {
     private Animator animator;
     Rigidbody rigidBody;
     AudioSource footstepSand, footstepWater, footstepDock;
+  
 
     float timeStart = 0;
     float timeEnd = 0;
     bool isAttacking = false;
     float waterLevel;
     //Quaternion rotation;
-	
+
     // Use this for initialization
 	void Start () {
 
@@ -44,20 +45,20 @@ public class PlayerController : MonoBehaviour {
 
         //if (x > .1 || z > .1) animator.SetBool("Attack", false);
         if (Input.GetKeyDown(KeyCode.Alpha8))
-        {            
+        {
             SceneManager.LoadScene(0);
         }
-            
+
         if (Input.GetKeyDown(KeyCode.Alpha9))
-        {           
+        {
             SceneManager.LoadScene(1);
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha0))
-        {           
+        {
             SceneManager.LoadScene(2);
         }
-        
+
 
         if (!this.animator.GetCurrentAnimatorStateInfo(0).IsName("Unarmed-Attack-L3"))
         {
@@ -79,12 +80,35 @@ public class PlayerController : MonoBehaviour {
                 Debug.Log(!Input.GetButton("Fire1"));
                 animator.SetBool("Attack", true);
                 isAttacking = true;
+               /*
+                for (int x =0; x < enemies.Length; x++)
+                {
+                    Vector3 direction = enemies[x].transform.position - this.transform.position;
+                    float angle = Vector3.Angle(direction, this.transform.forward);
+
+                    if (Vector3.Distance(this.transform.position, enemies[x].transform.position) < 20 && angle < 40)
+                    {
+                        if (direction.magnitude > 2)
+                        {
+
+                           // SpiderHealth.instance.TakeHit(2);
+
+
+                          //  if (SpiderHealth.instance.currentHealth == 0)
+                            //{
+                          //      Debug.Log("You Died");
+                           //     FindObjectOfType<GameManager>().EndGame();
+                            //}
+                        }
+                    }
+
+                }*/
             }
         }
 
         if (Input.GetKeyDown(KeyCode.H))
         {
-            PlayerHealth.instance.TakeHit(9);
+            PlayerHealth.instance.TakeHit(0);
         }
 
         if (PlayerHealth.instance.currentHealth == 0)
@@ -95,25 +119,25 @@ public class PlayerController : MonoBehaviour {
     }
 
     void FixedUpdate()
-    {        
+    {
 
         if (!this.animator.GetCurrentAnimatorStateInfo(0).IsName("Unarmed-Attack-L3"))
         {
             Vector3 movement;
-            if (z > 0) { 
+            if (z > 0) {
                 movement = transform.forward * 5 * z;
                 //InvokeRepeating("PlayFootstep", .1f, 1.0f);
             }
             else
                 movement = transform.forward * 2 * z;
-        
+
             movement.y = rigidBody.velocity.y;
             rigidBody.velocity = movement;
 
             //transform.Rotate(Vector3.up * rotateVelocity * x);
         }
 
-        
+
     }
 
     void FootstepEvent()
@@ -146,6 +170,6 @@ public class PlayerController : MonoBehaviour {
                 footstepDock.Play();
 
             }
-        }               
+        }
     }
 }
