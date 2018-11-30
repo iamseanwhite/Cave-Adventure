@@ -7,6 +7,7 @@ public class Fire1Off : MonoBehaviour {
    // public ParticleSystem particle;
     public GameObject[] torches;
     public GameObject Wall;
+    public GameObject torch;
     static Animator anim;
 
     // Use this for initialization
@@ -27,7 +28,7 @@ public class Fire1Off : MonoBehaviour {
 
         var em =ps.emission;
 
-        if (other.name == "ThirdPersonController")
+        if (other.name == "Melvin" && Inventory.instance.hasTorch == true)
         {
           //  torches = GameObject.FindGameObjectsWithTag("Torch1");
             InvokeRepeating("StopFire", 1, 1);

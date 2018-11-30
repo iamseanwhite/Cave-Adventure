@@ -20,7 +20,7 @@ public class OpenBox : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
 
-        if (other.name == "Player")
+        if (other.name == "Player" && Inventory.instance.haskey==true)
         {
 
             anim.SetBool("isOpen", true);

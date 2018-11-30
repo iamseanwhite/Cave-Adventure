@@ -22,6 +22,9 @@ public class Inventory : MonoBehaviour {
     public OnItemChanged onItemChangedCallback;
     public GameObject rapier;
     public GameObject torch;
+    public GameObject key;
+    public bool haskey = false;
+    public bool hasTorch = false;
 
     public int capacity = 6;
     public List<Item> items = new List<Item>();
@@ -68,6 +71,16 @@ public class Inventory : MonoBehaviour {
 
             if (onItemChangedCallback != null)
                 onItemChangedCallback.Invoke();
+
+            if (item.name == "Key")
+            {
+                haskey = true;
+            }
+
+            if (item.name == "Torch")
+            {
+                hasTorch = true;
+            }
 
             return true;
         }
@@ -119,5 +132,11 @@ public class Inventory : MonoBehaviour {
         if (item.name == "Torch")
             torch.SetActive(!torch.activeSelf);
             Debug.Log("torch active");
+             hasTorch = true;
+
+        if (item.name == "Key")
+            key.SetActive(!torch.activeSelf);
+        Debug.Log("key active");
+        haskey = true;
     }
 }
