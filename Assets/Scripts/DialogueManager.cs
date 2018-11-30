@@ -21,6 +21,7 @@ public class DialogueManager: MonoBehaviour
 
     public void StartDialog(Dialogue dialogue)
     {
+        Debug.Log("Dialogue Starting.");
         animator.SetBool("Open", true);
 
         nameText.text = dialogue.name;
@@ -47,7 +48,7 @@ public class DialogueManager: MonoBehaviour
         dialogueText.text = statement;
     }
 
-    void EndDialogue()
+    public void EndDialogue()
     {
         animator.SetBool("Open", false);
     }
