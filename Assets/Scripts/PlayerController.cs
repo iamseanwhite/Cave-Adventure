@@ -38,6 +38,8 @@ public class PlayerController : MonoBehaviour {
 
     void OnLevelWasLoaded()
     {
+        transform.position = GameObject.FindGameObjectWithTag("SpawnPoint").transform.position;
+
         if (SceneManager.GetActiveScene().name == "Island")
         {            
             waterLevel = 78.6f;
