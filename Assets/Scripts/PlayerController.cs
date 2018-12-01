@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour {
         //footstepWater = audioSources[1];
         //footstepDock = audioSources[2];
         waterLevel = SceneManager.GetActiveScene().name == "Island" ? 78.6f : 9f;
+        //DontDestroyOnLoad(this.gameObject);
     }
 
     void OnLevelWasLoaded()
