@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour {
 
-    GameObject rapier, rope, miniMapBorder;
+    GameObject rapier, rope, miniMapBorder, torch;
     AudioSource rapierDraw, rapierSheath;
 
     #region Singleton
@@ -17,7 +17,7 @@ public class Inventory : MonoBehaviour {
         Debug.Log("in awake");
         DontDestroyOnLoad(GameObject.FindWithTag("UI"));
         character = GameObject.FindWithTag("Player");
-        
+
     }
     #endregion
 
@@ -26,6 +26,7 @@ public class Inventory : MonoBehaviour {
         GameObject[] allObjects = Resources.FindObjectsOfTypeAll<GameObject>();
         rapier = allObjects.FirstOrDefault(x => x.CompareTag("InHandRapier"));
         rope = allObjects.FirstOrDefault(x => x.CompareTag("RopeExtended"));
+        torch = allObjects.FirstOrDefault(x => x.CompareTag("InHandTorch"));
         miniMapBorder = allObjects.FirstOrDefault(x => x.CompareTag("MiniMapBorder"));
         rapierDraw = rapier.GetComponent<AudioSource>();
     }
@@ -33,7 +34,10 @@ public class Inventory : MonoBehaviour {
     private GameObject character;
     public delegate void OnItemChanged();
     public OnItemChanged onItemChangedCallback;
-    
+    //public GameObject rapier;
+    public GameObject key;
+    public bool haskey = false;
+    public bool hasTorch = false;
 
     public int capacity = 6;
     public List<Item> items = new List<Item>();
@@ -44,8 +48,9 @@ public class Inventory : MonoBehaviour {
         Debug.Log("player is " + GameObject.FindWithTag("Player").name);
         character = GameObject.FindWithTag("Player");
         rapier = Resources.FindObjectsOfTypeAll<GameObject>().FirstOrDefault(x => x.CompareTag("InHandRapier"));
+        torch = Resources.FindObjectsOfTypeAll<GameObject>().FirstOrDefault(x => x.CompareTag("InHandTorch"));
     }
-        
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -82,6 +87,16 @@ public class Inventory : MonoBehaviour {
             if (onItemChangedCallback != null)
                 onItemChangedCallback.Invoke();
 
+            if (item.name == "Key")
+            {
+                haskey = true;
+            }
+
+            if (item.name == "Torch")
+            {
+                hasTorch = true;
+            }
+
             return true;
         }
         return false;
@@ -105,6 +120,13 @@ public class Inventory : MonoBehaviour {
         {
             item.isEquipped = !item.isEquipped;
             rapier.SetActive(false);
+        }
+
+        if (item.name == "Torch")
+        {
+            item.isEquipped = !item.isEquipped;
+            torch.SetActive(false);
+            Debug.Log("Torch equipped");
         }
 
         if (onItemChangedCallback != null)
@@ -132,25 +154,42 @@ public class Inventory : MonoBehaviour {
     {
         Debug.Log("in ToggleEquip - rapier name is " + rapier.name);
         item.isEquipped = !item.isEquipped;
+
         if (item.name == "Rapier")
-        {
+        {   
+
            Debug.Log("in setactive -" + rapier.activeSelf);
 
            //rapier = Resources.FindObjectsOfTypeAll<GameObject>().FirstOrDefault(x => x.CompareTag("Rapier"));
            rapier.SetActive(!rapier.activeSelf);
-           rapierDraw.Play();
+           if(rapierDraw != null)
+              rapierDraw.Play();
 
            Debug.Log("in setactive -" + rapier.activeSelf);
            Debug.Log("position -" + rapier.transform.position.x);
         }
-            
+
+        if (item.name == "Torch")
+        {
+            torch.SetActive(!torch.activeSelf);
+            Debug.Log("torch active");
+            hasTorch = true;
+        }
+
+        if (item.name == "Key")
+        {
+            key.SetActive(!key.activeSelf);
+            Debug.Log("key active");
+            haskey = true;
+        }
+
 
         if (item.name == "Rope")
-        { 
-            if (Vector3.Distance(GameObject.FindWithTag("Player").transform.position, 
+        {
+            if (Vector3.Distance(GameObject.FindWithTag("Player").transform.position,
                                  GameObject.FindWithTag("RopeTriggerPoint").transform.position) <= 2)
-            {                             
-                rope.SetActive(true);                
+            {
+                rope.SetActive(true);
                 RemoveAfterOneTimeUse(item);
             }
         }

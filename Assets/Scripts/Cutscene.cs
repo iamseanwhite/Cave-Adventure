@@ -54,6 +54,7 @@ public class Cutscene : MonoBehaviour {
     {
         beenToHouse = true;
         animator.SetBool("ReachedHouse", true);
+        keyInHand.SetActive(true);
         whereToGo = Door;
     }
 
