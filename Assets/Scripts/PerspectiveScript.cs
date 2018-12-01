@@ -14,7 +14,7 @@ public class PerspectiveScript : MonoBehaviour {
     void OnLevelWasLoaded()
     {
         GameObject[] allObjects = Resources.FindObjectsOfTypeAll<GameObject>();
-        mainCamera = allObjects.FirstOrDefault(x => x.name.Equals("Camera"));
+        mainCamera = allObjects.FirstOrDefault(x => x.CompareTag("MainCamera"));
     }
 
 	// Update is called once per frame
