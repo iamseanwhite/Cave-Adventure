@@ -54,10 +54,22 @@ public class Inventory : MonoBehaviour {
 
         GameObject[] allObjects = Resources.FindObjectsOfTypeAll<GameObject>();
         //rapier = allObjects.FirstOrDefault(x => x.CompareTag("InHandRapier"));
+
         if (SceneManager.GetActiveScene().name == "Island")
         {
             rope = allObjects.FirstOrDefault(x => x.CompareTag("RopeExtended"));
-            GameObject.FindWithTag("MiniMapBorder").SetActive(true);
+
+            //GameObject.FindWithTag("MiniMapBorder").SetActive(true);
+
+            Vector3 correctHealthBarPosition = transform.position;
+            correctHealthBarPosition.x = 300;
+            correctHealthBarPosition.y = -71; 
+
+
+            //SetHealthBarPosition(allObjects, correctHealthBarPosition);
+
+            //allObjects.First(x => x.CompareTag("HealthBorder")).transform.position = correctHealthBarPosition;
+            //Debug.Log("healthbar object is " + allObjects.First(x => x.CompareTag("HealthBorder")).name);
         }
             
         else
@@ -69,6 +81,11 @@ public class Inventory : MonoBehaviour {
         //miniMapBorder = allObjects.FirstOrDefault(x => x.CompareTag("MiniMapBorder"));
         //rapierDraw = rapier.GetComponent<AudioSource>();
     }
+
+    //void SetHealthBarPosition(GameObject[] allObjects, Vector3 correct)
+    //{
+    //    allObjects.First(x => x.CompareTag("HealthBorder")).transform.position = correct;
+    //}
 
     void Update()
     {

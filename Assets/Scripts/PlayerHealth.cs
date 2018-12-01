@@ -31,6 +31,14 @@ public class PlayerHealth : PlayerController {
         deathMusic = GameObject.FindGameObjectWithTag("Player").GetComponents<AudioSource>()[3];
     }
 
+    void OnLevelWasLoaded()
+    {
+        Vector3 correctHealthBarPosition = transform.position;
+        //correctHealthBarPosition.x += 0;
+        //correctHealthBarPosition.y += 0;
+        transform.position = correctHealthBarPosition;
+    }
+
     public void TakeHit(int damage)
     {
         currentHealth -= damage;
