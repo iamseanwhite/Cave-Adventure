@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpiderHealth : MonoBehaviour {
+public class IslandSpiderHealth : MonoBehaviour {
 
     public const int maxHealth = 20;
     public int currentHealth = maxHealth;
