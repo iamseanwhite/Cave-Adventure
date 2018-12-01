@@ -15,7 +15,7 @@ public class TiggerTriggers : MonoBehaviour {
     Rigidbody rigidBody;
     Vector3 tigerMovemement;
     Collider girlCollider, tigerCollider;
-    Camera mainCamera;
+    GameObject mainCamera;
 
     bool isLookingAtMelvin = false;
     bool healthIsTooLow = false;
@@ -23,13 +23,14 @@ public class TiggerTriggers : MonoBehaviour {
     void Start () {
         animator = GetComponent<Animator>();
         rigidBody = GetComponent<Rigidbody>();
-        mainCamera = Camera.main;
+        //mainCamera = Camera.main;
     }
 
     void OnLevelWasLoaded()
     {
         GameObject[] allObjects = Resources.FindObjectsOfTypeAll<GameObject>();
         Melvin = GameObject.FindWithTag("Player");
+        mainCamera = allObjects.FirstOrDefault(x => x.name.Equals("Camera"));
         Girl = allObjects.FirstOrDefault(x => x.name.Equals("Girl"));
         RunawayPoint = GameObject.FindWithTag("TigerRunawayPoint");
         
