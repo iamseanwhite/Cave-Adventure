@@ -19,7 +19,11 @@ public class IslandEndSceneTrigger : MonoBehaviour {
 
     public void endIfGoalsMet()
     {
-        //use InventoryUI.CS and test for presence of Shovel, Map, and Rope. If possessed,
-        //transition to next scene. If not, don't.
+        GameObject goalmet = GameObject.Find("GoalTracker");
+        GoalTracker goalTracker = goalmet.GetComponent<GoalTracker>();
+        if (goalTracker.hasSword() && goalTracker.hasShovel() && goalTracker.hasMap() && goalTracker.hasRope())
+        {
+            //end scene and go to next.
+        }
     }
 }
