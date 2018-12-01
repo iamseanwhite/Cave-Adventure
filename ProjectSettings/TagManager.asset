@@ -3,7 +3,35 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - ShovelTriggerPoint
+  - TigerRunawayPoint
+  - Terrain
+  - RopeTriggerPoint
+  - Inventory
+  - KeyInHand
+  - Tiger
+  - MiniMapBorder
+  - RunToPoint
+  - CavernCover
+  - Dock
+  - UI
+  - InHandRapier
+  - RopeExtended
+  - Water
+  - spider
+  - Coconut
+  - Undefined
+  - GateGuard
+  - Rock
+  - Torch1
+  - SpikesCollider
+  - torch
+  - Big Spider
+  - Pickup Torch
+  - InHandTorch
+  - Treasure
+  - SpawnPoint
   layers:
   - Default
   - TransparentFX

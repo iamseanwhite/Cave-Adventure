@@ -30,6 +30,7 @@ public class Inventory : MonoBehaviour {
         torch = allObjects.FirstOrDefault(x => x.CompareTag("InHandTorch"));
         miniMapBorder = allObjects.FirstOrDefault(x => x.CompareTag("MiniMapBorder"));
         rapierDraw = rapier.GetComponent<AudioSource>();
+        GameObject.FindWithTag("MiniMapBorder").SetActive(false);
     }
 
     private GameObject character;
@@ -54,7 +55,15 @@ public class Inventory : MonoBehaviour {
         GameObject[] allObjects = Resources.FindObjectsOfTypeAll<GameObject>();
         //rapier = allObjects.FirstOrDefault(x => x.CompareTag("InHandRapier"));
         if (SceneManager.GetActiveScene().name == "Island")
+        {
             rope = allObjects.FirstOrDefault(x => x.CompareTag("RopeExtended"));
+            GameObject.FindWithTag("MiniMapBorder").SetActive(true);
+        }
+            
+        else
+        {
+            GameObject.FindWithTag("MiniMapBorder").SetActive(false);
+        }
         //if (SceneManager.GetActiveScene().name == "Cave Kit Demo")
             //torch = allObjects.FirstOrDefault(x => x.CompareTag("InHandTorch"));
         //miniMapBorder = allObjects.FirstOrDefault(x => x.CompareTag("MiniMapBorder"));
