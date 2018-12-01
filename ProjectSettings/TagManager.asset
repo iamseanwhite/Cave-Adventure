@@ -6,36 +6,24 @@ TagManager:
   tags:
   - UI
   - Inventory
+  - InHandRapier
   - torch
   - Pickup Torch
-  - Rock
-  - Rapier
-  - Tiger
-  - RunToPoint
-  - Terrain
-  - Water
-  - RopeTriggerPoint
-  - RopeExtended
-  - CavernCover
-  - ShovelTriggerPoint
-  - InHandRapier
-  - Fire
-  - MiniMapBorder
-  - Dock
-<<<<<<< HEAD
-  - Map
   - spider
   - Coconut
   - GateGuard
-  - Goals
-=======
+  - MiniMapBorder
+  - ShovelTriggerPoint
+  - Terrain
+  - CavernCover
+  - RopeExtended
+  - Tiger
+  - RunToPoint
   - KeyInHand
-  - Torch1
-  - SpikesCollider
-  - Big Spider
-  - Treasure
-  - InHandTorch
->>>>>>> bd296d76863161b87b4660d3bf7e66906090fed4
+  - Water
+  - RopeTriggerPoint
+  - Dock
+  - TigerRunawayPoint
   layers:
   - Default
   - TransparentFX
