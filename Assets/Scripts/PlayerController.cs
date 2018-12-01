@@ -116,6 +116,16 @@ public class PlayerController : MonoBehaviour {
             Debug.Log("You Died");
         }
 
+        
+        }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.name == "Rock1" || other.name == "Rock2")
+        {
+            PlayerHealth.instance.TakeHit(2);
+        }
+
     }
 
     void FixedUpdate()

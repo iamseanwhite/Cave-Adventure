@@ -70,7 +70,7 @@ public class FollowScript : MonoBehaviour
                     anim.SetBool("isTaunting", false);
                     anim.SetBool("isRunning", false);
 
-                    PlayerHealth.instance.TakeHit(0);
+                    PlayerHealth.instance.TakeHit(3);
 
 
                     if (PlayerHealth.instance.currentHealth == 0)
