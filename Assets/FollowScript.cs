@@ -7,7 +7,7 @@ public class FollowScript : MonoBehaviour
 {
     public Transform[] target;
     public float speed;
-    public Transform player;
+    Transform player;
     private Animator anim;
     public float moveSpeed = 3f;
     public float rotSpeed = 100f;
@@ -23,6 +23,14 @@ public class FollowScript : MonoBehaviour
     {
         anim = this.GetComponent<Animator>();
         _navMeshAgent = this.GetComponent<NavMeshAgent>();
+         GameObject[] allObjects = Resources.FindObjectsOfTypeAll<GameObject>();
+        player = GameObject.FindWithTag("Player").transform;
+    }
+
+    void OnLevelWasLoaded()
+    {
+        GameObject[] allObjects = Resources.FindObjectsOfTypeAll<GameObject>();
+        player = GameObject.FindWithTag("Player").transform;
     }
 
     private void SetDestination()

@@ -21,11 +21,19 @@ public class Chase : MonoBehaviour {
     void Start () {
         anim = this.GetComponent<Animator>();
         _navMeshAgent = this.GetComponent<NavMeshAgent>();
-      
 
+        GameObject[] allObjects = Resources.FindObjectsOfTypeAll<GameObject>();
+        player = GameObject.FindWithTag("Player").transform;
 
     }
-   private void SetDestination()
+
+    void OnLevelWasLoaded()
+    {
+        GameObject[] allObjects = Resources.FindObjectsOfTypeAll<GameObject>();
+        player = GameObject.FindWithTag("Player").transform;
+    }
+
+    private void SetDestination()
     {
         if (player != null)
         {

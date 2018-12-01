@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour {
     Rigidbody rigidBody;
     AudioSource footstepSand, footstepWater, footstepDock;
   
-
+        
     float timeStart = 0;
     float timeEnd = 0;
     bool isAttacking = false;
@@ -33,11 +33,20 @@ public class PlayerController : MonoBehaviour {
         //footstepWater = audioSources[1];
         //footstepDock = audioSources[2];
         waterLevel = SceneManager.GetActiveScene().name == "Island" ? 78.6f : 9f;
+        //DontDestroyOnLoad(this.gameObject);
     }
 
     void OnLevelWasLoaded()
     {
-        waterLevel = SceneManager.GetActiveScene().name == "Island" ? 78.6f : 9f;
+        if (SceneManager.GetActiveScene().name == "Island")
+        {            
+            waterLevel = 78.6f;
+        }
+        else
+        {
+            waterLevel = 9f;
+        }
+        
     }
 
     // Update is called once per frame

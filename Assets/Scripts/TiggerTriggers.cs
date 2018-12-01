@@ -1,19 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityStandardAssets.ImageEffects;
 
 public class TiggerTriggers : MonoBehaviour {
 
-    public GameObject Melvin;
-    public GameObject Girl;
-    public GameObject RunawayPoint;
+     GameObject Melvin;
+     GameObject Girl;
+     GameObject RunawayPoint;
 
     Animator animator;
     Rigidbody rigidBody;
     Vector3 tigerMovemement;
     Collider girlCollider, tigerCollider;
-    Camera mainCamera;
+    GameObject mainCamera;
 
     bool isLookingAtMelvin = false;
     bool healthIsTooLow = false;
@@ -21,10 +23,21 @@ public class TiggerTriggers : MonoBehaviour {
     void Start () {
         animator = GetComponent<Animator>();
         rigidBody = GetComponent<Rigidbody>();
-        mainCamera = Camera.main;
+        //mainCamera = Camera.main;
     }
 
-	void Update ()
+    void OnLevelWasLoaded()
+    {
+        GameObject[] allObjects = Resources.FindObjectsOfTypeAll<GameObject>();
+        Melvin = GameObject.FindWithTag("Player");
+        mainCamera = allObjects.FirstOrDefault(x => x.name.Equals("Camera"));
+        Girl = allObjects.FirstOrDefault(x => x.name.Equals("Girl"));
+        RunawayPoint = GameObject.FindWithTag("TigerRunawayPoint");
+        
+    }
+            
+
+    void Update ()
     {
 
         //when Melvin is close enough

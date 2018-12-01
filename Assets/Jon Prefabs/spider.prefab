@@ -384,6 +384,7 @@ GameObject:
   - component: {fileID: 114273699797689356}
   - component: {fileID: 114912047048252300}
   - component: {fileID: 54630477594249990}
+  - component: {fileID: 114328006556160772}
   m_Layer: 0
   m_Name: spider
   m_TagString: spider
@@ -1744,6 +1745,18 @@ MonoBehaviour:
   speed: 5
   directionChangeInterval: 1
   maxHeadingChange: 30
+--- !u!114 &114328006556160772
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1566259230848762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7756188581c108498687f04c3b899a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 20
 --- !u!114 &114912047048252300
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1755,7 +1768,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97c8607c2f6d1354e9a38ff65ba65fb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coconutHit: 0
+  playerSeen: 0
   smoothTime: 3
   smoothVelocity: {x: 0, y: 0, z: 0}
   _playerHealth: {fileID: 0}

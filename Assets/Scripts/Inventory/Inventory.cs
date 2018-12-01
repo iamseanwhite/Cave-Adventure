@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Inventory : MonoBehaviour {
 
@@ -15,7 +16,7 @@ public class Inventory : MonoBehaviour {
     {
         instance = this;
         Debug.Log("in awake");
-        DontDestroyOnLoad(GameObject.FindWithTag("UI"));
+        //DontDestroyOnLoad(GameObject.FindWithTag("UI"));
         character = GameObject.FindWithTag("Player");
 
     }
@@ -25,7 +26,7 @@ public class Inventory : MonoBehaviour {
     {
         GameObject[] allObjects = Resources.FindObjectsOfTypeAll<GameObject>();
         rapier = allObjects.FirstOrDefault(x => x.CompareTag("InHandRapier"));
-        rope = allObjects.FirstOrDefault(x => x.CompareTag("RopeExtended"));
+        //rope = allObjects.FirstOrDefault(x => x.CompareTag("RopeExtended"));
         torch = allObjects.FirstOrDefault(x => x.CompareTag("InHandTorch"));
         miniMapBorder = allObjects.FirstOrDefault(x => x.CompareTag("MiniMapBorder"));
         rapierDraw = rapier.GetComponent<AudioSource>();
@@ -46,9 +47,18 @@ public class Inventory : MonoBehaviour {
     {
         Debug.Log("in OnLevelWasLoaded");
         Debug.Log("player is " + GameObject.FindWithTag("Player").name);
-        character = GameObject.FindWithTag("Player");
-        rapier = Resources.FindObjectsOfTypeAll<GameObject>().FirstOrDefault(x => x.CompareTag("InHandRapier"));
-        torch = Resources.FindObjectsOfTypeAll<GameObject>().FirstOrDefault(x => x.CompareTag("InHandTorch"));
+        //character = GameObject.FindWithTag("Player");
+        //rapier = Resources.FindObjectsOfTypeAll<GameObject>().FirstOrDefault(x => x.CompareTag("InHandRapier"));
+        //torch = Resources.FindObjectsOfTypeAll<GameObject>().FirstOrDefault(x => x.CompareTag("InHandTorch"));
+
+        GameObject[] allObjects = Resources.FindObjectsOfTypeAll<GameObject>();
+        //rapier = allObjects.FirstOrDefault(x => x.CompareTag("InHandRapier"));
+        if (SceneManager.GetActiveScene().name == "Island")
+            rope = allObjects.FirstOrDefault(x => x.CompareTag("RopeExtended"));
+        //if (SceneManager.GetActiveScene().name == "Cave Kit Demo")
+            //torch = allObjects.FirstOrDefault(x => x.CompareTag("InHandTorch"));
+        //miniMapBorder = allObjects.FirstOrDefault(x => x.CompareTag("MiniMapBorder"));
+        //rapierDraw = rapier.GetComponent<AudioSource>();
     }
 
     void Update()
