@@ -22,12 +22,20 @@ TagManager:
   - Fire
   - MiniMapBorder
   - Dock
+<<<<<<< HEAD
+  - Map
+  - spider
+  - Coconut
+  - GateGuard
+  - Goals
+=======
   - KeyInHand
   - Torch1
   - SpikesCollider
   - Big Spider
   - Treasure
   - InHandTorch
+>>>>>>> bd296d76863161b87b4660d3bf7e66906090fed4
   layers:
   - Default
   - TransparentFX
