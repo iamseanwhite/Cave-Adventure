@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour {
     float timeEnd = 0;
     bool isAttacking = false;
     float waterLevel;
+    bool isCave = false;
     //Quaternion rotation;
 
     // Use this for initialization
@@ -29,9 +30,9 @@ public class PlayerController : MonoBehaviour {
         rigidBody = GetComponent<Rigidbody>();
 
         var audioSources = GetComponents<AudioSource>();
-        //footstepSand = audioSources[0];
-        //footstepWater = audioSources[1];
-        //footstepDock = audioSources[2];
+        footstepSand = audioSources[0];
+        footstepWater = audioSources[1];
+        footstepDock = audioSources[2];
         waterLevel = SceneManager.GetActiveScene().name == "Island" ? 78.6f : 9f;
         //DontDestroyOnLoad(this.gameObject);
     }
@@ -47,10 +48,14 @@ public class PlayerController : MonoBehaviour {
         {            
             waterLevel = 78.6f;
         }
-        else
+        else 
         {
-            waterLevel = 9f;
+            isCave = true;
         }
+        //else
+        //{
+        //    waterLevel = 9f;
+        //}
         
     }
     
@@ -173,28 +178,28 @@ public class PlayerController : MonoBehaviour {
             var floortag = hit.collider.gameObject.tag;
             Debug.Log(floortag);
 
-            //if (transform.position.y <= waterLevel)
-            //{
-            //    footstepWater.pitch = UnityEngine.Random.Range(.95f, 1.2f);
-            //    footstepWater.volume = UnityEngine.Random.Range(.1f, .35f);
-            //    footstepWater.Play();
+            if (transform.position.y <= waterLevel && !isCave)
+            {
+                footstepWater.pitch = UnityEngine.Random.Range(.95f, 1.2f);
+                footstepWater.volume = UnityEngine.Random.Range(.1f, .35f);
+                footstepWater.Play();
 
-            //}
-            //if (floortag == "Terrain")
-            //{
-            //    footstepSand.pitch = UnityEngine.Random.Range(.9f, 1.2f);
-            //    footstepSand.volume = UnityEngine.Random.Range(.75f, 1f);
-            //    footstepSand.Play();
+            }
+            if (floortag == "Terrain")
+            {
+                footstepSand.pitch = UnityEngine.Random.Range(.9f, 1.2f);
+                footstepSand.volume = UnityEngine.Random.Range(.75f, 1f);
+                footstepSand.Play();
 
-            //}
+            }
 
-            //else if (floortag == "Dock")
-            //{
-            //    footstepDock.pitch = UnityEngine.Random.Range(.8f, .9f);
-            //    footstepDock.volume = UnityEngine.Random.Range(.3f, .4f);
-            //    footstepDock.Play();
+            else if (floortag == "Dock")
+            {
+                footstepDock.pitch = UnityEngine.Random.Range(.8f, .9f);
+                footstepDock.volume = UnityEngine.Random.Range(.3f, .4f);
+                footstepDock.Play();
 
-            //}
+            }
         }
     }
 }
