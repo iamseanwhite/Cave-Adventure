@@ -38,7 +38,10 @@ public class PlayerController : MonoBehaviour {
 
     void OnLevelWasLoaded()
     {
+        animator.SetBool("IsDead", false);
         transform.position = GameObject.FindGameObjectWithTag("SpawnPoint").transform.position;
+        
+        PlayerHealth.instance.TakeHit(-100);
 
         if (SceneManager.GetActiveScene().name == "Island")
         {            
@@ -50,6 +53,7 @@ public class PlayerController : MonoBehaviour {
         }
         
     }
+    
 
     // Update is called once per frame
     void LateUpdate () {

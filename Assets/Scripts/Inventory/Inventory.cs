@@ -28,7 +28,7 @@ public class Inventory : MonoBehaviour {
         rapier = allObjects.FirstOrDefault(x => x.CompareTag("InHandRapier"));
         //rope = allObjects.FirstOrDefault(x => x.CompareTag("RopeExtended"));
         torch = allObjects.FirstOrDefault(x => x.CompareTag("InHandTorch"));
-        miniMapBorder = allObjects.FirstOrDefault(x => x.CompareTag("MiniMapBorder"));
+        miniMapBorder = allObjects.FirstOrDefault(x => x.CompareTag("MiniMapBorder"));        
         rapierDraw = rapier.GetComponent<AudioSource>();
         GameObject.FindWithTag("MiniMapBorder").SetActive(false);
     }
@@ -60,6 +60,7 @@ public class Inventory : MonoBehaviour {
             rope = allObjects.FirstOrDefault(x => x.CompareTag("RopeExtended"));
 
             //GameObject.FindWithTag("MiniMapBorder").SetActive(true);
+            miniMapBorder.SetActive(true);
 
             Vector3 correctHealthBarPosition = transform.position;
             correctHealthBarPosition.x = 300;
@@ -163,6 +164,12 @@ public class Inventory : MonoBehaviour {
             item.isEquipped = !item.isEquipped;
             torch.SetActive(false);
             Debug.Log("Torch equipped");
+        }
+
+        if (item.name == "Treasure Map")
+        {
+            item.isEquipped = false;
+            miniMapBorder.SetActive(false);
         }
 
         if (onItemChangedCallback != null)
