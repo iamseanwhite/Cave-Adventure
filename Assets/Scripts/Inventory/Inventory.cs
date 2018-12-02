@@ -6,8 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class Inventory : MonoBehaviour {
 
-    GameObject rapier, rope, miniMapBorder, torch;
+    GameObject rapier, rope, miniMapBorder, torch, treasure, fireworks;
     AudioSource rapierDraw, rapierSheath;
+    //public bool isNextToChest = false;
+    OpenBox openBoxScript;
 
     #region Singleton
     public static Inventory instance;
@@ -41,6 +43,7 @@ public class Inventory : MonoBehaviour {
     //public GameObject torch;
     public bool haskey = false;
     public bool hasTorch = false;
+    Animator treasureAnimimator;
 
     public int capacity = 6;
     public List<Item> items = new List<Item>();
@@ -73,11 +76,22 @@ public class Inventory : MonoBehaviour {
             //allObjects.First(x => x.CompareTag("HealthBorder")).transform.position = correctHealthBarPosition;
             //Debug.Log("healthbar object is " + allObjects.First(x => x.CompareTag("HealthBorder")).name);
         }
+        
 
         else
         {
-            GameObject.FindWithTag("MiniMapBorder").SetActive(false);
+            Debug.Log("in the cave...!");
+            //GameObject.FindWithTag("MiniMapBorder").SetActive(false);
             torch = allObjects.FirstOrDefault(x => x.CompareTag("InHandTorch"));
+            treasure = allObjects.FirstOrDefault(x => x.name.Equals("tresure_box"));
+            Debug.Log("treasure is " + treasure.name);
+
+            openBoxScript = treasure.GetComponent<OpenBox>();
+
+            treasureAnimimator = treasure.GetComponent<Animator>();
+            Debug.Log("Animator is " + treasureAnimimator.name);
+            Debug.Log("isopen is " + treasureAnimimator.GetBool("IsOpen"));
+            fireworks = allObjects.FirstOrDefault(x => x.CompareTag("Fireworks"));
         }
         //if (SceneManager.GetActiveScene().name == "Cave Kit Demo")
             //torch = allObjects.FirstOrDefault(x => x.CompareTag("InHandTorch"));
@@ -126,18 +140,18 @@ public class Inventory : MonoBehaviour {
             if (onItemChangedCallback != null)
                 onItemChangedCallback.Invoke();
 
-// hasTorch/hasKey true only when it is equipped.
-/*
-            if (item.name == "Key")
-            {
-               haskey = true;
-            }
+           
+            //if (item.name == "Key")
+            //{
+            //    haskey = true;
+            //}
 
-            if (item.name == "Torch")
-            {
-                hasTorch = true;
-            }
-*/
+            // hasTorch true only when it is equipped.
+            //if (item.name == "Torch")
+            //{
+            //    hasTorch = true;
+            //}
+
             return true;
         }
         return false;
@@ -174,10 +188,10 @@ public class Inventory : MonoBehaviour {
 
         if (item.name == "Key")
         {
-            item.isEquipped = !item.isEquipped;
-            key.SetActive(false);
+            //item.isEquipped = !item.isEquipped;
+            //key.SetActive(false);
             Debug.Log("Key removed");
-            haskey = false;
+            //haskey = false;
         }
 
             
@@ -205,6 +219,21 @@ public class Inventory : MonoBehaviour {
         {
             PlayerHealth.instance.TakeHit(-10);
             RemoveAfterOneTimeUse(item);
+        }
+
+        if (item.name == "Key")
+        {
+            Debug.Log("Using the key....");
+            if (Vector3.Distance(GameObject.FindWithTag("Player").transform.position,
+                                 GameObject.FindWithTag("Treasure").transform.position) <= 2)
+            {
+                Debug.Log("Should be opening...");
+               //openBoxScript.OpenTheBox();
+                treasureAnimimator.SetBool("isOpen", true);
+                fireworks.SetActive(true);
+                GetComponent<AudioSource>().Play();
+                Invoke("GoBackToMenu", 7.0f);
+            }
         }
     }
 
@@ -240,22 +269,21 @@ public class Inventory : MonoBehaviour {
                 hasTorch = false;
             }
             Debug.Log("torch is " + torch.activeSelf);
-
         }
 
-        if (item.name == "Key")
-        {
-            key.SetActive(!key.activeSelf);
-            Debug.Log("key active");
-            if (torch.activeSelf == true)
-            {
-                haskey = true;
-            }
-            else
-            {
-                haskey = false;
-            }
-        }
+        //if (item.name == "Key")
+        //{
+        //    key.SetActive(!key.activeSelf);
+        //    Debug.Log("key active");
+        //    if (torch.activeSelf == true)
+        //    {
+        //        haskey = true;
+        //    }
+        //    else
+        //    {
+        //        haskey = false;
+        //    }
+        //}
 
 
         if (item.name == "Rope")
@@ -267,6 +295,8 @@ public class Inventory : MonoBehaviour {
                 RemoveAfterOneTimeUse(item);
             }
         }
+
+        
 
         if (item.name == "Shovel")
         {
@@ -291,5 +321,10 @@ public class Inventory : MonoBehaviour {
 
         if (onItemChangedCallback != null)
             onItemChangedCallback.Invoke();
+    }
+
+    void GoBackToMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 }

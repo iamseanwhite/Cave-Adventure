@@ -16,6 +16,7 @@ public class FollowScript : MonoBehaviour
     private bool isRotatingLeft = false;
     private bool isRotatingRight = false;
     private bool isWalking = false;
+    Vector3 direction;
 
     private int current;
 
@@ -44,10 +45,20 @@ public class FollowScript : MonoBehaviour
 
         }
     }
+
+    public void CaveDamageEvent()
+    {
+        if (direction.magnitude < 2)
+        {
+            Debug.Log("In CaveDamage");
+            PlayerHealth.instance.TakeHit(10);
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
-        Vector3 direction = player.position - this.transform.position;
+        direction = player.position - this.transform.position;
         float angle = Vector3.Angle(direction, this.transform.forward);
 
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("isDead")) {
@@ -78,13 +89,13 @@ public class FollowScript : MonoBehaviour
                     anim.SetBool("isTaunting", false);
                     anim.SetBool("isRunning", false);
 
-                    PlayerHealth.instance.TakeHit(1);
+                    //PlayerHealth.instance.TakeHit(1);
 
 
                     if (PlayerHealth.instance.currentHealth == 0)
                     {
                         Debug.Log("You Died");
-                        FindObjectOfType<GameManager>().EndGame();
+                        //FindObjectOfType<GameManager>().EndGame();
 
                     }
                 }
@@ -164,4 +175,8 @@ public class FollowScript : MonoBehaviour
             }
             isWandering = false;
         }
-    }
+
+    
+}
+
+    

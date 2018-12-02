@@ -66,17 +66,22 @@ public class PlayerController : MonoBehaviour {
         //if (x > .1 || z > .1) animator.SetBool("Attack", false);
         if (Input.GetKeyDown(KeyCode.Alpha8))
         {
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(1);
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha9))
         {
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(2);
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha0))
         {
-            SceneManager.LoadScene(2);
+            SceneManager.LoadScene(3);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha7))
+        {
+            SceneManager.LoadScene(0);
         }
 
 

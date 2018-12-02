@@ -11,4 +11,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Menu.unity
     guid: 0b01244d56059ab4f84bb5ffb1e83c75
+  - enabled: 1
+    path: Assets/Scenes/portTownScene.unity
+    guid: 7c6363996e7572d46aa00e964c3c22c3
+  - enabled: 1
+    path: Assets/Scenes/Island.unity
+    guid: b05a2008a0f15e24bafde1a12219b743
+  - enabled: 1
+    path: Assets/Scenes/Cave kit Demo.unity
+    guid: f8ad4553ad4ce5843b337a1d0519d882
   m_configObjects: {}
