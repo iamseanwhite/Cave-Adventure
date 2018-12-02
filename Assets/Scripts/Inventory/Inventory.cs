@@ -50,7 +50,7 @@ public class Inventory : MonoBehaviour {
         Debug.Log("player is " + GameObject.FindWithTag("Player").name);
         //character = GameObject.FindWithTag("Player");
         //rapier = Resources.FindObjectsOfTypeAll<GameObject>().FirstOrDefault(x => x.CompareTag("InHandRapier"));
-        //torch = Resources.FindObjectsOfTypeAll<GameObject>().FirstOrDefault(x => x.CompareTag("InHandTorch"));
+        
 
         GameObject[] allObjects = Resources.FindObjectsOfTypeAll<GameObject>();
         //rapier = allObjects.FirstOrDefault(x => x.CompareTag("InHandRapier"));
@@ -76,6 +76,7 @@ public class Inventory : MonoBehaviour {
         else
         {
             GameObject.FindWithTag("MiniMapBorder").SetActive(false);
+            torch = allObjects.FirstOrDefault(x => x.CompareTag("InHandTorch"));
         }
         //if (SceneManager.GetActiveScene().name == "Cave Kit Demo")
             //torch = allObjects.FirstOrDefault(x => x.CompareTag("InHandTorch"));
@@ -215,8 +216,8 @@ public class Inventory : MonoBehaviour {
         if (item.name == "Torch")
         {
             torch.SetActive(!torch.activeSelf);
-            Debug.Log("torch active");
-            hasTorch = true;
+            Debug.Log("torch is " + torch.activeSelf);
+            
         }
 
         if (item.name == "Key")
