@@ -9,6 +9,7 @@ public class PlayerHealth : PlayerController {
 
     #region Singleton
     public static PlayerHealth instance;
+    bool alreadyDead = false;
 
     void Awake()
     {
@@ -37,6 +38,7 @@ public class PlayerHealth : PlayerController {
         //correctHealthBarPosition.x += 0;
         //correctHealthBarPosition.y += 0;
         transform.position = correctHealthBarPosition;
+        alreadyDead = false;
     }
 
     public void TakeHit(int damage)
@@ -47,7 +49,7 @@ public class PlayerHealth : PlayerController {
         healthBar.rectTransform.sizeDelta = new Vector2((currentHealth / 100.0f) * healthTotal, 20);
         //myCamera.GetComponent<CameraMotionBlur>().enabled = true;
 
-        if (currentHealth == 0)
+        if (currentHealth == 0 && !alreadyDead)
         {
             Die();
         }
@@ -55,6 +57,7 @@ public class PlayerHealth : PlayerController {
 
     void Die()
     {
+        alreadyDead = true;
         Debug.Log("Setting IsDead to true");
         animator.SetBool("IsDead", true);
         deathMusic.Play();

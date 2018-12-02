@@ -51,7 +51,7 @@ public class Inventory : MonoBehaviour {
         Debug.Log("player is " + GameObject.FindWithTag("Player").name);
         //character = GameObject.FindWithTag("Player");
         //rapier = Resources.FindObjectsOfTypeAll<GameObject>().FirstOrDefault(x => x.CompareTag("InHandRapier"));
-        //torch = Resources.FindObjectsOfTypeAll<GameObject>().FirstOrDefault(x => x.CompareTag("InHandTorch"));
+
 
         GameObject[] allObjects = Resources.FindObjectsOfTypeAll<GameObject>();
         //rapier = allObjects.FirstOrDefault(x => x.CompareTag("InHandRapier"));
@@ -61,10 +61,11 @@ public class Inventory : MonoBehaviour {
             rope = allObjects.FirstOrDefault(x => x.CompareTag("RopeExtended"));
 
             //GameObject.FindWithTag("MiniMapBorder").SetActive(true);
+            miniMapBorder.SetActive(true);
 
             Vector3 correctHealthBarPosition = transform.position;
             correctHealthBarPosition.x = 300;
-            correctHealthBarPosition.y = -71; 
+            correctHealthBarPosition.y = -71;
 
 
             //SetHealthBarPosition(allObjects, correctHealthBarPosition);
@@ -72,10 +73,11 @@ public class Inventory : MonoBehaviour {
             //allObjects.First(x => x.CompareTag("HealthBorder")).transform.position = correctHealthBarPosition;
             //Debug.Log("healthbar object is " + allObjects.First(x => x.CompareTag("HealthBorder")).name);
         }
-            
+
         else
         {
             GameObject.FindWithTag("MiniMapBorder").SetActive(false);
+            torch = allObjects.FirstOrDefault(x => x.CompareTag("InHandTorch"));
         }
         //if (SceneManager.GetActiveScene().name == "Cave Kit Demo")
             //torch = allObjects.FirstOrDefault(x => x.CompareTag("InHandTorch"));
@@ -167,7 +169,7 @@ public class Inventory : MonoBehaviour {
             torch.SetActive(false);
             Debug.Log("Torch removed");
             hasTorch = false;
-   
+
         }
 
         if (item.name == "Key")
@@ -178,7 +180,14 @@ public class Inventory : MonoBehaviour {
             haskey = false;
         }
 
-            if (onItemChangedCallback != null)
+            
+        if (item.name == "Treasure Map")
+        {
+            item.isEquipped = false;
+            miniMapBorder.SetActive(false);
+        }
+
+        if (onItemChangedCallback != null)
             onItemChangedCallback.Invoke();
     }
 
@@ -205,7 +214,7 @@ public class Inventory : MonoBehaviour {
         item.isEquipped = !item.isEquipped;
 
         if (item.name == "Rapier")
-        {   
+        {
 
            Debug.Log("in setactive -" + rapier.activeSelf);
 
@@ -230,6 +239,8 @@ public class Inventory : MonoBehaviour {
             {
                 hasTorch = false;
             }
+            Debug.Log("torch is " + torch.activeSelf);
+
         }
 
         if (item.name == "Key")

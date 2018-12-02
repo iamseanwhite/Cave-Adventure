@@ -41,7 +41,7 @@ public class TiggerTriggers : MonoBehaviour {
     {
 
         //when Melvin is close enough
-        if (Vector3.Distance(Melvin.transform.position, this.transform.position) < 40)
+        if (Vector3.Distance(Melvin.transform.position, this.transform.position) < 60)
         {
             if (!healthIsTooLow)
             {
