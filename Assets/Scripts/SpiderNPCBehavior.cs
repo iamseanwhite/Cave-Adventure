@@ -10,22 +10,27 @@ public class SpiderNPCBehavior : MonoBehaviour
     public float smoothTime = 3.0f;
     public Vector3 smoothVelocity = Vector3.zero;
     public PlayerHealth _playerHealth;
+    public IslandSpiderHealth health;
 
     void Start()
     {
         animator = GetComponent<Animator>();
-        animator.Play("Walk");
     }
 
     void Update()
     {
+        if (health.currentHealth == 0)
+        {
+            DestroySelf();
+        }
+
         var pc = GameObject.Find("Melvin");
         if (!playerSeen && Vector3.Distance(pc.transform.position, this.transform.position) < 20)
         {
             Debug.Log("in first if statement.");
-            //animator.SetBool("SeesMelvin", true);
-            //animator.Play("Jump");
-            //SpiderMovement.isAttacking = true;
+            animator.SetBool("SeesMelvin", true);
+            animator.Play("Jump");
+            SpiderMovement.isAttacking = true;
             var cm = GameObject.Find("Melvin");
             animator.Play("Walk");
             SpiderMovement.isAttacking = true;
