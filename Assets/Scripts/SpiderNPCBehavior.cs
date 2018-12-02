@@ -20,10 +20,11 @@ public class SpiderNPCBehavior : MonoBehaviour
     public float smoothTime = 3.0f;
     public Vector3 smoothVelocity = Vector3.zero;
     public PlayerHealth _playerHealth;
-    public GameObject uiGameObject;
+    //public GameObject uiGameObject;
     public IslandSpiderHealth spiderHealth;
     public SpiderMovement spiderMovement;
-    public Animation spiderAnim;
+    //public Animation spiderAnim;
+    float timedAttack = 0f;
 
     void Start()
     {
@@ -35,6 +36,8 @@ public class SpiderNPCBehavior : MonoBehaviour
 
     void Update()
     {
+        var pc = GameObject.Find("Melvin");
+
 
         if (dead)
         {
@@ -54,7 +57,29 @@ public class SpiderNPCBehavior : MonoBehaviour
             //animator.Play("Die");
         }
 
-        var pc = GameObject.Find("Melvin");
+        if (!dead && Vector3.Distance(pc.transform.position, this.transform.position) < 2)
+        {
+            if (timedAttack <= 0f)
+            {
+                timedAttack = 2f;
+            }
+
+            if (timedAttack > 0f)
+            {
+                timedAttack -= Time.deltaTime;
+                if (timedAttack <= 0f)
+                {
+                    Debug.Log("Fight happening.");
+                    _playerHealth = GameObject.Find("HealthBorder").GetComponent<PlayerHealth>();
+                    spiderMovement.SetIsAttackingToTrue();
+                    animator.SetBool("IsAttacking", true);
+                    animator.Play("Attack");
+                    _playerHealth.TakeHit(10);
+                }
+            }
+        }
+
+
         if (!dead && !playerSeen && Vector3.Distance(pc.transform.position, this.transform.position) < 20)
         {
             Debug.Log("in first if statement.");
@@ -82,9 +107,9 @@ public class SpiderNPCBehavior : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter(Collision col)
+    void OnColliderEnter(Collider col)
     {
-        if (col.gameObject.CompareTag("Player"))
+        if (col.gameObject.name == "Melvin")
         {
             Debug.Log("In Collision function");
             Debug.Log("Collision happening.");
