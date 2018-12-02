@@ -7,18 +7,18 @@ public class IslandEndSceneTrigger : MonoBehaviour {
 
     public GameObject Melvin;
     public GameObject GateGuard;
-    public Inventory inventory;
+    //public Inventory inventory;
 
     void Start()
     {
-        inventory = GetComponent<Inventory>();
+        //inventory = GetComponent<Inventory>();
     }
 
     void Update()
     {
         float dist = Vector3.Distance(Melvin.transform.position, GateGuard.transform.position);
 
-        if (dist < 10)
+        if (dist < 21)
         {
             endIfGoalsMet();
         }
@@ -26,9 +26,9 @@ public class IslandEndSceneTrigger : MonoBehaviour {
 
     public void endIfGoalsMet()
     {
-        if (inventory.items.Count == 4)
+        if (Inventory.instance.items.Count == 4)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
+            SceneManager.LoadScene(2);
         }
     }
 }
