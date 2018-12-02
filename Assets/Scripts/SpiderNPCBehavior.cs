@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 
 public class SpiderNPCBehavior : MonoBehaviour
@@ -7,39 +8,53 @@ public class SpiderNPCBehavior : MonoBehaviour
 
     Animator animator;
     public bool playerSeen = false;
+    public bool dead = false;
     public float smoothTime = 3.0f;
     public Vector3 smoothVelocity = Vector3.zero;
     public PlayerHealth _playerHealth;
-    public IslandSpiderHealth health;
+    public GameObject uiGameObject;
+    public IslandSpiderHealth spiderHealth;
+    public SpiderMovement spiderMovement;
 
     void Start()
     {
         animator = GetComponent<Animator>();
+        spiderHealth = GetComponent<IslandSpiderHealth>();
+        spiderMovement = GetComponent<SpiderMovement>();
+        _playerHealth = GameObject.Find("HealthBorder").GetComponent<PlayerHealth>();
     }
 
     void Update()
     {
-        if (health.currentHealth == 0)
+
+
+        if (spiderHealth.currentHealth == 0)
         {
-            DestroySelf();
+            dead = true;
+            Debug.Log("Dying now");
+            spiderMovement.SetIsDieToTrue();
+            animator.SetBool("IsAttacking", false);
+            animator.SetBool("SeesMelvin", false);
+            animator.SetBool("IsIdle", false);
+            animator.SetBool("IsDead", true);
+            animator.Play("Die");
         }
 
         var pc = GameObject.Find("Melvin");
-        if (!playerSeen && Vector3.Distance(pc.transform.position, this.transform.position) < 20)
+        if (!dead && !playerSeen && Vector3.Distance(pc.transform.position, this.transform.position) < 20)
         {
             Debug.Log("in first if statement.");
             animator.SetBool("SeesMelvin", true);
             animator.Play("Jump");
-            SpiderMovement.isAttacking = true;
+            spiderMovement.SetIsAttackingToTrue();
             var cm = GameObject.Find("Melvin");
             animator.Play("Walk");
-            SpiderMovement.isAttacking = true;
             var tf = cm.transform;
             this.gameObject.transform.LookAt(tf);
             playerSeen = true;
         }
 
-        if (playerSeen)
+        if (!dead && playerSeen)
         {
             Debug.Log("in playerseen if statement.");
             var cm = GameObject.Find("Melvin");
@@ -59,17 +74,11 @@ public class SpiderNPCBehavior : MonoBehaviour
         {
             Debug.Log("In Collision function");
             Debug.Log("Collision happening.");
-            _playerHealth = GameObject.Find("Player").GetComponent<PlayerHealth>();
+            _playerHealth = GameObject.Find("Melvin").GetComponent<PlayerHealth>();
+            spiderMovement.SetIsAttackingToTrue();
             animator.SetBool("IsAttacking", true);
             animator.Play("Attack");
             _playerHealth.TakeHit(10);
         }
-    }
-
-    IEnumerator DestroySelf()
-    {
-        yield return new WaitForSecondsRealtime(4);
-        animator.Play("Die");
-        Destroy(this.gameObject, 4);
     }
 }
