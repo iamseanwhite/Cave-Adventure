@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace UnityStandardAssets.CrossPlatformInput
 {
@@ -8,9 +9,19 @@ namespace UnityStandardAssets.CrossPlatformInput
 
         public string Name;
 
-        void OnEnable()
+        public void OnEnable()
         {
 
+        }
+
+        public void Aa()
+        {
+            SceneManager.LoadScene(0);
+        }
+
+        public void Zz()
+        {
+            Application.Quit();
         }
 
         public void SetDownState()
