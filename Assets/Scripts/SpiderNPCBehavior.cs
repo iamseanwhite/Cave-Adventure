@@ -5,6 +5,14 @@ using UnityEngine;
 
 public class SpiderNPCBehavior : MonoBehaviour
 {
+    #region Singleton
+    public static SpiderNPCBehavior instance;
+
+    void Awake()
+    {
+        instance = this;
+    }
+    #endregion
 
     Animator animator;
     public bool playerSeen = false;
@@ -15,6 +23,7 @@ public class SpiderNPCBehavior : MonoBehaviour
     public GameObject uiGameObject;
     public IslandSpiderHealth spiderHealth;
     public SpiderMovement spiderMovement;
+    public Animation spiderAnim;
 
     void Start()
     {
@@ -27,6 +36,10 @@ public class SpiderNPCBehavior : MonoBehaviour
     void Update()
     {
 
+        if (dead)
+        {
+            return;
+        }
 
         if (spiderHealth.currentHealth == 0)
         {
@@ -37,7 +50,8 @@ public class SpiderNPCBehavior : MonoBehaviour
             animator.SetBool("SeesMelvin", false);
             animator.SetBool("IsIdle", false);
             animator.SetBool("IsDead", true);
-            animator.Play("Die");
+            //spiderAnim["Die"].wrapMode = WrapMode.ClampForever;
+            //animator.Play("Die");
         }
 
         var pc = GameObject.Find("Melvin");
