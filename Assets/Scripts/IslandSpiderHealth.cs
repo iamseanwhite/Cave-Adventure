@@ -3,6 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class IslandSpiderHealth : MonoBehaviour {
+    #region Singleton
+    public static IslandSpiderHealth instance;
+
+    void Awake()
+    {
+        instance = this;
+    }
+    #endregion
 
     public const int maxHealth = 20;
     public int currentHealth = maxHealth;

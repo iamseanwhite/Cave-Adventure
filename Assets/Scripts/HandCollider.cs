@@ -77,5 +77,11 @@ public class HandCollider : MonoBehaviour {
             Spider4Health.instance.TakeHit(9);
             Debug.Log("Skeleton: " + Spider4Health.instance.currentHealth);
         }
+        else if (other.CompareTag("spider") && PlayerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Unarmed-Attack-L3"))
+        {
+            Debug.Log("You damaged the spider");
+            IslandSpiderHealth.instance.TakeDamage(10);
+            Debug.Log("spider: " + IslandSpiderHealth.instance.currentHealth);
+        }
     }
 }
