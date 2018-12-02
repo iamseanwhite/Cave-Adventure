@@ -140,17 +140,17 @@ public class Inventory : MonoBehaviour {
             if (onItemChangedCallback != null)
                 onItemChangedCallback.Invoke();
 
-           
+
             //if (item.name == "Key")
             //{
             //    haskey = true;
             //}
 
             // hasTorch true only when it is equipped.
-            //if (item.name == "Torch")
-            //{
-            //    hasTorch = true;
-            //}
+            if (item.name == "Torch")
+            {
+                hasTorch = true;
+            }
 
             return true;
         }
@@ -179,11 +179,10 @@ public class Inventory : MonoBehaviour {
 
         if (item.name == "Torch")
         {
-            item.isEquipped = !item.isEquipped;
+            item.isEquipped = false;
             torch.SetActive(false);
             Debug.Log("Torch removed");
             hasTorch = false;
-
         }
 
         if (item.name == "Key")

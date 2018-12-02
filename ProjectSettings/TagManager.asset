@@ -35,6 +35,7 @@ TagManager:
   - HealthBorder
   - Fireworks
   - TreasureOpen
+  - newCameraTag
   layers:
   - Default
   - TransparentFX
