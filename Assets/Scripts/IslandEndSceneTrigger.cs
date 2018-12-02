@@ -1,11 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class IslandEndSceneTrigger : MonoBehaviour {
 
     public GameObject Melvin;
     public GameObject GateGuard;
+    public Inventory inventory;
+
+    void Start()
+    {
+        inventory = GetComponent<Inventory>();
+    }
 
     void Update()
     {
@@ -19,11 +26,9 @@ public class IslandEndSceneTrigger : MonoBehaviour {
 
     public void endIfGoalsMet()
     {
-        GameObject goalmet = GameObject.Find("GoalTracker");
-        GoalTracker goalTracker = goalmet.GetComponent<GoalTracker>();
-        if (goalTracker.hasSword() && goalTracker.hasShovel() && goalTracker.hasMap() && goalTracker.hasRope())
+        if (inventory.items.Count == 4)
         {
-            //end scene and go to next.
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
         }
     }
 }
