@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 public class DontDestroy : MonoBehaviour {
 
     GameObject mainCamera;
+    bool firstTimeInMenu = true;
+
 	// Use this for initialization
 	void Start () {
         DontDestroyOnLoad(this.gameObject);
@@ -18,6 +20,15 @@ public class DontDestroy : MonoBehaviour {
         {
             //transform.position = new Vector3(150, 165, 10);
             //GameObject.FindGameObjectWithTag("Player").transform.position = GameObject.FindGameObjectWithTag("SpawnPoint").transform.position;
+        }
+
+        if (SceneManager.GetActiveScene().name == "Menu" && !firstTimeInMenu)
+        {            
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            firstTimeInMenu = false;
         }
 
         //else

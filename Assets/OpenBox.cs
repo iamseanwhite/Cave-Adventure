@@ -7,6 +7,18 @@ public class OpenBox : MonoBehaviour
     static Animator anim;
     public GameObject fireworks;
     // Use this for initialization
+
+    //#region Singleton
+    //public static OpenBox instance;
+
+    //void Awake()
+    //{
+    //    instance = this;
+    //    Debug.Log("in openbox awake");
+
+    //}
+    //#endregion
+
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -18,15 +30,22 @@ public class OpenBox : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter(Collider other)
+    //private void OnTriggerEnter(Collider other)
+    //{
+
+    //    if (other.name == "Melvin" && Inventory.instance.haskey == true)
+    //    {
+    //        //Inventory.instance.isNextToChest = true;
+    //        anim.SetBool("isOpen", true);
+    //        fireworks.SetActive(!fireworks.activeSelf);
+    //    }
+    //}
+    
+    public void OpenTheBox()
     {
-
-        if (other.name == "Melvin" && Inventory.instance.haskey==true)
-        {
-
-            anim.SetBool("isOpen", true);
-            fireworks.SetActive(!fireworks.activeSelf);
-        }
+        Debug.Log("In OpenTheBox");
+        anim.SetBool("isOpen", true);
+        fireworks.SetActive(!fireworks.activeSelf);        
     }
 
 }

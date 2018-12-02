@@ -11,12 +11,13 @@ public class Chase : MonoBehaviour {
     private Animator anim;
     public float speed;
     NavMeshAgent _navMeshAgent;
+    Vector3 direction;
 
 
    // [SerializeField]
    // Transform _destination;
 
-    
+
 
     void Start () {
         anim = this.GetComponent<Animator>();
@@ -45,10 +46,19 @@ public class Chase : MonoBehaviour {
         }
     }
 
+    public void SkeletonDamageEvent()
+    {
+        if (direction.magnitude < 2)
+        {
+            Debug.Log("In CaveDamage");
+            PlayerHealth.instance.TakeHit(10);
+        }
+    }
+
     // Update is called once per frame
     void Update () {
 
-        Vector3 direction = player.position - this.transform.position;
+        direction = player.position - this.transform.position;
         float angle = Vector3.Angle(direction, this.transform.forward);
 
         if (Vector3.Distance(player.position, this.transform.position) < 10)
@@ -76,7 +86,7 @@ public class Chase : MonoBehaviour {
                 anim.SetBool("isAttacking", true);
                 anim.SetBool("isWalking", false);
 
-                PlayerHealth.instance.TakeHit(1);
+                //PlayerHealth.instance.TakeHit(1);
 
                 if (PlayerHealth.instance.currentHealth == 0)
                 {

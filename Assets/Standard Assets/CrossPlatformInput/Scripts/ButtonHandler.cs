@@ -16,7 +16,7 @@ namespace UnityStandardAssets.CrossPlatformInput
 
         public void Aa()
         {
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(1);
         }
 
         public void Zz()
