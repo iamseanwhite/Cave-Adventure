@@ -84,7 +84,6 @@ public class SpiderNPCBehavior : MonoBehaviour
         {
             Debug.Log("in first if statement.");
             animator.SetBool("SeesMelvin", true);
-            animator.Play("Jump");
             spiderMovement.SetIsAttackingToTrue();
             var cm = GameObject.Find("Melvin");
             animator.Play("Walk");
@@ -107,7 +106,7 @@ public class SpiderNPCBehavior : MonoBehaviour
         }
     }
 
-    void OnColliderEnter(Collider col)
+    /*void OnColliderEnter(Collider col)
     {
         if (col.gameObject.name == "Melvin")
         {
@@ -119,5 +118,5 @@ public class SpiderNPCBehavior : MonoBehaviour
             animator.Play("Attack");
             _playerHealth.TakeHit(10);
         }
-    }
+    }*/
 }
