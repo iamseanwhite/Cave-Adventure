@@ -18,7 +18,7 @@ public class IslandEndSceneTrigger : MonoBehaviour {
     {
         float dist = Vector3.Distance(Melvin.transform.position, GateGuard.transform.position);
 
-        if (dist < 21)
+        if (dist < 11)
         {
             endIfGoalsMet();
         }
