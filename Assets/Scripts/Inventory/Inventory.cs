@@ -81,7 +81,7 @@ public class Inventory : MonoBehaviour {
         else
         {
             Debug.Log("in the cave...!");
-            //GameObject.FindWithTag("MiniMapBorder").SetActive(false);
+            GameObject.FindWithTag("MiniMapBorder").SetActive(false);
             torch = allObjects.FirstOrDefault(x => x.CompareTag("InHandTorch"));
             treasure = allObjects.FirstOrDefault(x => x.name.Equals("tresure_box"));
             Debug.Log("treasure is " + treasure.name);
