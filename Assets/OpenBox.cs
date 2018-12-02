@@ -5,6 +5,7 @@ using UnityEngine;
 public class OpenBox : MonoBehaviour
 {
     static Animator anim;
+    public GameObject fireworks;
     // Use this for initialization
     void Start()
     {
@@ -20,10 +21,11 @@ public class OpenBox : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
 
-        if (other.name == "Player" && Inventory.instance.haskey==true)
+        if (other.name == "Melvin" && Inventory.instance.haskey==true)
         {
 
             anim.SetBool("isOpen", true);
+            fireworks.SetActive(!fireworks.activeSelf);
         }
     }
 

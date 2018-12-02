@@ -38,6 +38,7 @@ public class Inventory : MonoBehaviour {
     public OnItemChanged onItemChangedCallback;
     //public GameObject rapier;
     public GameObject key;
+    //public GameObject torch;
     public bool haskey = false;
     public bool hasTorch = false;
 
@@ -123,16 +124,18 @@ public class Inventory : MonoBehaviour {
             if (onItemChangedCallback != null)
                 onItemChangedCallback.Invoke();
 
+// hasTorch/hasKey true only when it is equipped.
+/*
             if (item.name == "Key")
             {
-                haskey = true;
+               haskey = true;
             }
 
             if (item.name == "Torch")
             {
                 hasTorch = true;
             }
-
+*/
             return true;
         }
         return false;
@@ -162,10 +165,20 @@ public class Inventory : MonoBehaviour {
         {
             item.isEquipped = !item.isEquipped;
             torch.SetActive(false);
-            Debug.Log("Torch equipped");
+            Debug.Log("Torch removed");
+            hasTorch = false;
+   
         }
 
-        if (onItemChangedCallback != null)
+        if (item.name == "Key")
+        {
+            item.isEquipped = !item.isEquipped;
+            key.SetActive(false);
+            Debug.Log("Key removed");
+            haskey = false;
+        }
+
+            if (onItemChangedCallback != null)
             onItemChangedCallback.Invoke();
     }
 
@@ -209,14 +222,28 @@ public class Inventory : MonoBehaviour {
         {
             torch.SetActive(!torch.activeSelf);
             Debug.Log("torch active");
-            hasTorch = true;
+            if (torch.activeSelf == true)
+            {
+                hasTorch = true;
+            }
+            else
+            {
+                hasTorch = false;
+            }
         }
 
         if (item.name == "Key")
         {
             key.SetActive(!key.activeSelf);
             Debug.Log("key active");
-            haskey = true;
+            if (torch.activeSelf == true)
+            {
+                haskey = true;
+            }
+            else
+            {
+                haskey = false;
+            }
         }
 
 

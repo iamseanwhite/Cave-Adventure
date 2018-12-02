@@ -76,7 +76,7 @@ public class Chase : MonoBehaviour {
                 anim.SetBool("isAttacking", true);
                 anim.SetBool("isWalking", false);
 
-                PlayerHealth.instance.TakeHit(2);
+                PlayerHealth.instance.TakeHit(1);
 
                 if (PlayerHealth.instance.currentHealth == 0)
                 {
