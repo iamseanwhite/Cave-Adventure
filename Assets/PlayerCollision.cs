@@ -8,9 +8,10 @@ public class PlayerCollision : MonoBehaviour {
 	// Use this for initialization
 	void OnTriggerEnter(Collider other)
     {
-        if(other.name == "SpikesCollider")
+        if(other.name == "Melvin")
         {
             FindObjectOfType<GameManager>().EndGame();
+            Debug.Log("End Game");
            
             
         }

@@ -6,7 +6,8 @@ public class SpiderMovement : MonoBehaviour
 {
 
     // Variables
-    public static bool isDie, isAttacking = false;
+    public static bool isDie = false; 
+    public static bool isAttacking = false;
 
     public float speed = 5;
     public float directionChangeInterval = 1;
@@ -22,6 +23,7 @@ public class SpiderMovement : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         spiderAnimator = GetComponent<Animator>();
+        spiderAnimator.Play("Walk");
 
         heading = Random.Range(0, 360);
         transform.eulerAngles = new Vector3(0, heading, 0);
@@ -31,8 +33,9 @@ public class SpiderMovement : MonoBehaviour
 
     void Update()
     {
-        if (!isDie & !isAttacking)
+        if (!isDie && !isAttacking)
         {
+            Debug.Log("In SpiderMovement script -- !isDie && !isAttacking.");
             transform.eulerAngles = Vector3.Slerp(transform.eulerAngles, targetRotation, Time.deltaTime * directionChangeInterval);
             var forward = transform.TransformDirection(Vector3.forward);
             controller.SimpleMove(forward * speed);

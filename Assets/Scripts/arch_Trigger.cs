@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class arch_Trigger : MonoBehaviour {
     public GameObject[] rollers;
-    public GameObject hurt;
     public float xSpeed=0;
     public float ySpeed=0;
     public float ballspeed;

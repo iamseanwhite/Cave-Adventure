@@ -28,7 +28,7 @@ public class Inventory : MonoBehaviour {
         rapier = allObjects.FirstOrDefault(x => x.CompareTag("InHandRapier"));
         //rope = allObjects.FirstOrDefault(x => x.CompareTag("RopeExtended"));
         torch = allObjects.FirstOrDefault(x => x.CompareTag("InHandTorch"));
-        miniMapBorder = allObjects.FirstOrDefault(x => x.CompareTag("MiniMapBorder"));        
+        miniMapBorder = allObjects.FirstOrDefault(x => x.CompareTag("MiniMapBorder"));
         rapierDraw = rapier.GetComponent<AudioSource>();
         GameObject.FindWithTag("MiniMapBorder").SetActive(false);
     }
@@ -38,6 +38,7 @@ public class Inventory : MonoBehaviour {
     public OnItemChanged onItemChangedCallback;
     //public GameObject rapier;
     public GameObject key;
+    //public GameObject torch;
     public bool haskey = false;
     public bool hasTorch = false;
 
@@ -50,7 +51,7 @@ public class Inventory : MonoBehaviour {
         Debug.Log("player is " + GameObject.FindWithTag("Player").name);
         //character = GameObject.FindWithTag("Player");
         //rapier = Resources.FindObjectsOfTypeAll<GameObject>().FirstOrDefault(x => x.CompareTag("InHandRapier"));
-        
+
 
         GameObject[] allObjects = Resources.FindObjectsOfTypeAll<GameObject>();
         //rapier = allObjects.FirstOrDefault(x => x.CompareTag("InHandRapier"));
@@ -64,7 +65,7 @@ public class Inventory : MonoBehaviour {
 
             Vector3 correctHealthBarPosition = transform.position;
             correctHealthBarPosition.x = 300;
-            correctHealthBarPosition.y = -71; 
+            correctHealthBarPosition.y = -71;
 
 
             //SetHealthBarPosition(allObjects, correctHealthBarPosition);
@@ -72,7 +73,7 @@ public class Inventory : MonoBehaviour {
             //allObjects.First(x => x.CompareTag("HealthBorder")).transform.position = correctHealthBarPosition;
             //Debug.Log("healthbar object is " + allObjects.First(x => x.CompareTag("HealthBorder")).name);
         }
-            
+
         else
         {
             GameObject.FindWithTag("MiniMapBorder").SetActive(false);
@@ -125,16 +126,18 @@ public class Inventory : MonoBehaviour {
             if (onItemChangedCallback != null)
                 onItemChangedCallback.Invoke();
 
+// hasTorch/hasKey true only when it is equipped.
+/*
             if (item.name == "Key")
             {
-                haskey = true;
+               haskey = true;
             }
 
             if (item.name == "Torch")
             {
                 hasTorch = true;
             }
-
+*/
             return true;
         }
         return false;
@@ -164,9 +167,20 @@ public class Inventory : MonoBehaviour {
         {
             item.isEquipped = !item.isEquipped;
             torch.SetActive(false);
-            Debug.Log("Torch equipped");
+            Debug.Log("Torch removed");
+            hasTorch = false;
+
         }
 
+        if (item.name == "Key")
+        {
+            item.isEquipped = !item.isEquipped;
+            key.SetActive(false);
+            Debug.Log("Key removed");
+            haskey = false;
+        }
+
+            
         if (item.name == "Treasure Map")
         {
             item.isEquipped = false;
@@ -200,7 +214,7 @@ public class Inventory : MonoBehaviour {
         item.isEquipped = !item.isEquipped;
 
         if (item.name == "Rapier")
-        {   
+        {
 
            Debug.Log("in setactive -" + rapier.activeSelf);
 
@@ -216,15 +230,31 @@ public class Inventory : MonoBehaviour {
         if (item.name == "Torch")
         {
             torch.SetActive(!torch.activeSelf);
+            Debug.Log("torch active");
+            if (torch.activeSelf == true)
+            {
+                hasTorch = true;
+            }
+            else
+            {
+                hasTorch = false;
+            }
             Debug.Log("torch is " + torch.activeSelf);
-            
+
         }
 
         if (item.name == "Key")
         {
             key.SetActive(!key.activeSelf);
             Debug.Log("key active");
-            haskey = true;
+            if (torch.activeSelf == true)
+            {
+                haskey = true;
+            }
+            else
+            {
+                haskey = false;
+            }
         }
 
 
