@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class SpiderMovement : MonoBehaviour
 {
+    #region Singleton
+    public static SpiderMovement instance;
+
+    void Awake()
+    {
+        instance = this;
+    }
+    #endregion
 
     // Variables
     public static bool isDie = false; 
@@ -22,8 +30,6 @@ public class SpiderMovement : MonoBehaviour
     void Start()
     {
         controller = GetComponent<CharacterController>();
-        spiderAnimator = GetComponent<Animator>();
-        spiderAnimator.Play("Walk");
 
         heading = Random.Range(0, 360);
         transform.eulerAngles = new Vector3(0, heading, 0);
@@ -58,4 +64,15 @@ public class SpiderMovement : MonoBehaviour
         heading = Random.Range(floor, ceil);
         targetRotation = new Vector3(0, heading, 0);
     }
+
+    public void SetIsDieToTrue()
+    {
+        isDie = true;
+    }
+
+    public void SetIsAttackingToTrue()
+    {
+        isAttacking = true;
+    }
+
 }
